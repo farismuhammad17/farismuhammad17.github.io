@@ -1,0 +1,112 @@
+:root {
+    --bg-body: #121212;
+    --bg-island: rgba(36, 36, 36, 0.5);
+    --bg-island-hover: rgba(45, 45, 45, 0.6);
+    --border-color: rgba(255, 255, 255, 0.1);
+    --border-hover: rgba(255, 255, 255, 0.18);
+    --shadow-color: rgba(0, 0, 0, 0.3);
+    --accent: #3b82f6;
+    --text-main: #f8fafc;
+    --text-muted: #94a3b8;
+
+    --bg-subtle: rgba(255, 255, 255, 0.02);
+    --border-dashed: rgba(255, 255, 255, 0.08);
+    --bg-tag: rgba(59, 130, 246, 0.12);
+    --border-tag: rgba(59, 130, 246, 0.2);
+
+    --bg-button: #1a1a1a;
+
+    --bg-hover-subtle: rgba(255, 255, 255, 0.05);
+    --bg-badge: #1a1a1a;
+
+    --bg-overlay: rgba(0, 0, 0, 0.85);
+    --border-overlay: rgba(255, 255, 255, 0.1);
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--bg-body);
+    color: var(--text-main);
+    font-family: system-ui, -apple-system, sans-serif;
+
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
+
+#starfield {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;
+    pointer-events: none;
+}
+
+a {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--accent);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+a:hover {
+    color: var(--text-main);
+    text-decoration: underline;
+}
+
+img {
+    user-drag: none;
+    -webkit-user-drag: none;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+}
+
+*, *:focus, *:active {
+    outline: none !important;
+}
+
+#center {
+    width: 1050px;
+    height: 640px;
+    max-width: 95%;
+    max-height: 90vh;
+    padding: 1.75rem;
+    background-color: transparent;
+    border-color: transparent;
+    display: grid;
+    grid-template-columns: 240px 1fr 280px;
+    grid-template-rows: minmax(0, 1fr) minmax(0, 1fr) auto;
+    gap: 1.25rem;
+    box-sizing: border-box;
+
+    user-select: text;
+    -webkit-user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
+}
+
+.island {
+    background: var(--bg-island);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--border-color);
+    border-radius: 14px;
+    padding: 1.5rem;
+    box-shadow: 0 8px 32px var(--shadow-color);
+    transition: transform 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+}
+
+.island:hover {
+    background: var(--bg-island-hover);
+    border-color: var(--border-hover);
+}

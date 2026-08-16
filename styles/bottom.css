@@ -1,0 +1,158 @@
+#bottom-wide {
+    grid-column: 1 / span 2;
+    grid-row: 3;
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    padding: 1.25rem 1.5rem;
+}
+
+.bottom-tabs {
+    display: flex;
+    gap: 0.5rem;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 0.5rem;
+}
+
+.tab-btn {
+    background: transparent;
+    border: none;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    font-weight: 600;
+    padding: 0.4rem 0.8rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.tab-btn:hover {
+    color: var(--text-main);
+    background-color: var(--bg-hover-subtle);
+}
+
+.tab-btn.active {
+    color: var(--text-main);
+    background-color: var(--accent);
+}
+
+.tab-content-container {
+    position: relative;
+    min-height: 50px;
+    display: flex;
+    align-items: center;
+}
+
+.tab-pane {
+    display: none;
+    width: 100%;
+}
+
+.tab-pane.active {
+    display: block;
+}
+
+.tab-placeholder {
+    margin: 0;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+/* --- Tech Stack --- */
+
+.tech-stack-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    width: 100%;
+}
+
+.tech-badge {
+    background-color: var(--bg-badge);
+    border: 1px solid var(--border-color);
+    color: var(--text-main);
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 0.35rem 0.75rem;
+    border-radius: 6px;
+    transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.tech-badge:hover {
+    border-color: var(--accent);
+    background-color: rgba(59, 130, 246, 0.1);
+}
+
+/* --- Music --- */
+
+.music-player {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.track-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+}
+
+.track-title {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-main);
+}
+
+.track-status {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+.player-controls {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+#volume-slider {
+    accent-color: var(--accent);
+    cursor: pointer;
+    width: 80px;
+}
+
+.visualizer-container {
+    display: flex;
+    justify-content: center;
+    flex-grow: 1;
+    margin: 0 5px;
+}
+
+#visualizer {
+    width: 100%;
+    max-width: 280px;
+    height: 40px;
+    background: transparent;
+    border: none;
+    display: block;
+}
+
+/* --- License --- */
+
+.license-content {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    padding: 0.2rem 0;
+}
+
+.license-content p {
+    margin: 0;
+    line-height: 1.4;
+}
+
+.license-content b {
+    color: var(--text-main);
+}

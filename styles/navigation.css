@@ -1,0 +1,85 @@
+#selector {
+    grid-column: 1;
+    grid-row: 1 / span 2;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+#selector h3 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.1rem;
+    letter-spacing: 0.05em;
+    color: var(--text-muted);
+    text-transform: uppercase;
+}
+
+.button-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+#selector button {
+    background-color: var(--bg-button);
+    color: var(--text-main);
+    border: 1px solid var(--border-color);
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    text-align: left;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+#selector button:hover,
+#selector button.active {
+    background-color: var(--accent);
+    border-color: var(--accent);
+    color: var(--text-main);
+    transform: translateX(4px);
+}
+
+.nav-pane {
+    display: none;
+    flex-direction: column;
+    justify-content: flex-start;
+    height: 100%;
+    min-height: 0;
+    flex: 1;
+}
+
+.nav-pane.active {
+    display: flex;
+}
+
+.nav-pane h2 {
+    margin: 0 0 0.25rem 0;
+    font-size: 1.6rem;
+}
+
+.nav-pane .subtitle {
+    margin: 0 0 0.75rem 0;
+    color: var(--accent);
+    font-weight: 600;
+    font-size: 0.9rem;
+}
+
+.nav-pane .bio {
+    margin: 0;
+    color: var(--text-muted);
+    line-height: 1.5;
+    font-size: 0.9rem;
+}
+
+.nav-pane a {
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.2s ease;
+}
+
+.nav-pane a:hover {
+    color: var(--text-main);
+    text-decoration: underline;
+}

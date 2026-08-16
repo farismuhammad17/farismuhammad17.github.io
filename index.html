@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Faris Muhammad | Portfolio</title>
+
+    <meta property="title" content="Faris Muhammad | Kernel C Developer">
+    <meta property="description" content="Portfolio page of Faris Muhammad.">
+    <meta name="author" content="Faris Muhammad">
+    <meta property="image" content="assets/images/icon.png">
+    <meta name="keywords" content="Faris, Farix, Kernel, Systems Programming, Assembly, Web Portfolio">
+    <meta name="theme-color" content="#121212">
+    <link rel="icon" type="image/png" href="assets/images/icon.png">
+
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/bottom.css">
+    <link rel="stylesheet" href="styles/center.css">
+    <link rel="stylesheet" href="styles/navigation.css">
+    <link rel="stylesheet" href="styles/right.css">
+    <link rel="stylesheet" href="styles/mouse.css">
+</head>
+<body>
+    <canvas id="starfield"></canvas>
+
+    <div id="center">
+        <div id="selector" class="island">
+            <h3>Navigation</h3>
+            <div class="button-group">
+                <button class="nav-btn active" data-target="about" onclick="window.setSlideKey(0)">About</button>
+                <button class="nav-btn" data-target="projects">Projects</button>
+                <button class="nav-btn" data-target="achievements">Achievements</button>
+                <button class="nav-btn" data-target="links">Links</button>
+                <button class="nav-btn" data-target="contact">Contact</button>
+            </div>
+        </div>
+
+        <div id="text-widget" class="island">
+            <div id="about" class="nav-pane active">
+                <h2>Faris Muhammad • فارس محمد</h2>
+                <p class="subtitle">Kernel C Developer</p>
+                <p class="bio"><b>Hi!</b> I'm a <span id="age"><i><b>(my age was supposed to be here, browser issues probably)</b></i></span>-year-old programmer <i>(started at 9)</i> exploring and building the mechanics of operating systems. Currently, I'm dabbling into hardware tinkerings, Raspberry PIs and such. The rest of the paragraphs in this section are just about me, and unrelated to my programming abilities.</p>
+
+                <p class="about-title">Background & Education</p>
+                <p class="bio">I studied in Sharjah Indian School, <b>UAE</b>, till class 7, continued my education in Indian School al Maabela, <b>Oman</b>, till 11th, and continued 12th in National Centre for Excellence, in <b>Bangalore</b>.</p>
+
+                <p class="about-title">Language Journey</p>
+                <p class="bio">Python was my first language, which I picked up when I was 9, after which, I continued into Java, but found it boring. Currently, I am into C, developing my own Operating System and other personal projects.</p>
+                <p class="bio">One of the best things about Bangalore, in comparison to Oman, is, as far as I can see, there are a lot more competitions here, letting me express my abilities in programming more. Such activities help one delve further into programming, rewards one for it, and helps build actual team experience.</p>
+            </div>
+
+            <div id="projects" class="nav-pane">
+                <h2>Projects</h2>
+                <div class="project-list">
+                    <div class="project-item">
+                        <img src="assets/images/farix-banner.png" alt="Farix OS Banner" class="project-banner">
+                        <a href="https://github.com/farismuhammad17/Farix" target="_blank">Farix OS</a>
+                        <span class="project-desc">My 64-bit Operating System/Kernel built in C & Assembly with a custom Python "FXTools" build system.</span>
+
+                        <div class="project-meta">
+                            <div class="project-tags">
+                                <span class="proj-tag">C</span>
+                                <span class="proj-tag">Assembly</span>
+                                <span class="proj-tag">Python</span>
+                            </div>
+                            <span class="project-license">GNU AGPL v3</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="achievements" class="nav-pane">
+                <h2>Achievements</h2>
+                <p class="subtitle">Click any point to learn more</p>
+                <div class="achievement-list">
+                    <div class="achievement-item" data-target-pane="ach-codewars" onclick="window.setSlideKey(1)">
+                        HPE CodeWars (25th July, 2026): 8th position
+                    </div>
+                    <div class="achievement-item" data-target-pane="ach-hacknexus" onclick="window.setSlideKey(2)">
+                        Hacknexus (8th August, 2026): 1st position
+                    </div>
+                    <div class="achievement-item" data-target-pane="ach-rhetorica" onclick="window.setSlideKey(0)">
+                        Rhetorica (14th August, 2026): 2nd position
+                    </div>
+                </div>
+            </div>
+            <div id="ach-codewars" class="nav-pane">
+                <button class="back-btn" data-target-pane="achievements">← Back to Achievements</button>
+                <h2>HPE CodeWars 2026</h2>
+                <div class="pane-scroll-content">
+                    <p class="subtitle">Hewlett-Packard Enterprise • 8th Position • 25th July, 2026</p>
+                    <p>Organised in Bangalore in 2026, it was a big competition, where many race to solve <b>30 or-so questions within the limited time</b> given using <b>Python, Java, C, or C++</b>. The questions progress in difficulty, and harder questions earn more points.</p>
+                    <p>I had joined my new school in Bangalore less than a month ago, and of perhaps <b>130-140 teams</b>, my team, of three high-schoolers, placed <b>8th</b>. It was the first competition I attended, and I was happy with the outcome. I had no preparation, and I accept it.</p>
+                </div>
+            </div>
+            <div id="ach-hacknexus" class="nav-pane">
+                <button class="back-btn" data-target-pane="achievements">← Back to Achievements</button>
+                <h2>Hacknexus</h2>
+                <div class="pane-scroll-content">
+                    <p class="subtitle">National Public School ITPL • 1st Position • 8th August, 2026</p>
+                    <p>A Hackathon under the name "Hacknexus". You are provided a set of <b>10 questions</b> to solve within <b>90 minutes</b>. I solved them in 40.</p>
+                    <p>Placing <b>1st</b>, I got the school a trophy, myself a certificate and a cheque for 5000 INR. The money was not of my concern and went to my father, for my concern was merely that I had won. I had, once again, no preparation (no clue how to).</p>
+                    <p>Additionally, NPS's Principal was happy to have me and told me "continue on my path" and "do what I do and keep growing" or something along those lines.</p>
+                </div>
+            </div>
+            <div id="ach-rhetorica" class="nav-pane">
+                <button class="back-btn" data-target-pane="achievements">← Back to Achievements</button>
+                <h2>Rhetorica</h2>
+                <div class="pane-scroll-content">
+                    <p class="subtitle">National Centre for Excellence • 2nd Position • 14th August, 2026</p>
+                    <p>Rhetorica is a collection of events, one of which was a Hackathon. This greatly differed from the earlier competitions I had attended, since those were pure coding challenges. This, on the other hand, constituted multiple rounds to test participants':</p>
+
+                    <ul>
+                      <li><b>Programming Skills <i>(30, 20, 5 minutes each question)</i>:</b> Three programming questions to solve, similar to the earlier competitions.</li>
+                      <li><b>Creative problem solving <i>(45 minutes)</i>:</b> Designed ultrasonic animal-deterrent sensor network for railway tracks.</li>
+                      <li><b>Robotics <i>(40 minutes)</i>:</b> Participants were allowed to observe a given "road" to build a simple contraption with simple material to be a sort of "car" capable of traversing through it. We were unfortunately inadequately provided materials, hence given an additional 10 minutes with the aforementioned missing materials we were initially unaware of (figured from others' creations). The final creation worked well, far better than we expected.</li>
+                      <li><b>Presentation skills <i>(45 minutes)</i>:</b> "Helmet that serves to help Cyclists' safety." Participants had to create a presentation of 5 slides (max) and speak on the solution that they come up with. We thought of infrared cameras to see in the dark; engines and warm blood are hot enough to be seen, even when dark, using which, we can improve night cycling safety.</li>
+                    </ul>
+
+                    <p>I arrived at the school at 8 am, and left at 7 pm, and stayed for so long, as our team of three had won <b>2nd</b> place.</p>
+                </div>
+            </div>
+
+            <div id="links" class="nav-pane">
+                <h2>Links</h2>
+                <div class="link-list">
+                    <div class="link-item">
+                        <a href="https://github.com/farismuhammad17" target="_blank">GitHub</a>
+                        <span class="link-desc">Where I stash my source codes</span>
+                    </div>
+                    <div class="link-item">
+                        <a href="https://leetcode.com/u/FarisMuhammad/" target="_blank">LeetCode</a>
+                        <span class="link-desc">I sometimes do it when I'm bored.</span>
+                    </div>
+                </div>
+            </div>
+
+            <div id="contact" class="nav-pane">
+                <h2>Contact</h2>
+                <p class="subtitle">I'm introverted</p>
+                <div class="contact-list">
+                    <div class="contact-item">Email: <a href="mailto:farismuhd172009@gmail.com">farismuhd172009@gmail.com</a></div>
+                </div>
+            </div>
+        </div>
+
+        <div id="bottom-wide" class="island">
+            <div class="bottom-tabs">
+                <button class="tab-btn active" data-target="tab-music">Music</button>
+                <button class="tab-btn" data-target="tab-tech">Tech Stack</button>
+                <button class="tab-btn" data-target="tab-license">License</button>
+            </div>
+
+            <div class="tab-content-container">
+                <div id="tab-music" class="tab-pane active">
+                    <div class="music-player">
+                        <div class="track-info">
+                            <span class="track-title">Background Music</span>
+                            <span class="track-status" id="play-status">Auto-playing</span>
+                        </div>
+                        <div class="visualizer-container">
+                            <canvas id="visualizer" width="260" height="40"></canvas>
+                        </div>
+                        <div class="player-controls">
+                            <label for="volume-slider" class="volume-label">Vol:</label>
+                            <input type="range" id="volume-slider" min="0" max="1" step="0.05" value="0.2">
+                        </div>
+                        <audio id="bg-audio" loop>
+                            <source src="assets/audios/bgm.mp3" type="audio/mpeg">
+                            Your browser does not support the audio element.
+                        </audio>
+                    </div>
+                </div>
+
+                <div id="tab-tech" class="tab-pane">
+                    <div class="tech-stack-grid">
+                        <div class="tech-badge">C</div>
+                        <div class="tech-badge">C++</div>
+                        <div class="tech-badge">Assembly</div>
+                        <div class="tech-badge">Python</div>
+                        <div class="tech-badge">HTML</div>
+                        <div class="tech-badge">CSS</div>
+                        <div class="tech-badge">JavaScript</div>
+                        <div class="tech-badge">Git</div>
+                        <div class="tech-badge">GCC</div>
+                    </div>
+                </div>
+
+                <div id="tab-license" class="tab-pane">
+                    <div class="license-content">
+                        <p>Copyright (c) 2026 Faris Muhammad. External media is utilized under Creative Commons licensing principles. Images do not feature any person other than myself. Additional information in source <a href="https://github.com/farismuhammad17/farismuhammad17.github.io/" target="_blank">repository</a>.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="right-tall" class="island">
+            <img alt="Images Slideshow">
+            <div class="slide-overlay-card">
+                <h4 id="slide-title"></h4>
+                <p id="slide-desc"></p>
+            </div>
+        </div>
+    </div>
+
+    <div id="custom-menu" class="context-menu" hidden>
+        <ul>
+            <li id="menu-theme">Theme: Dark</li>
+
+            <li class="menu-group" style="padding: 8px 16px; cursor: default;">
+                <div style="font-size: 11px; font-weight: bold; margin-bottom: 6px; opacity: 0.7;">STAR CONTROLS</div>
+
+                <label style="display: flex; justify-content: space-between; align-items: center; font-size: 13px; margin-bottom: 8px;">
+                    Blast Radius:
+                    <input type="number" id="input-blast-radius" value="350" style="width: 60px; background: var(--bg-body); color: var(--text-main); border: 1px solid var(--border-color); border-radius: 4px; padding: 2px 4px;">
+                </label>
+
+                <label style="display: flex; justify-content: space-between; align-items: center; font-size: 13px; margin-bottom: 8px;">
+                    Blast Power:
+                    <input type="number" step="0.5" id="input-blast-strength" value="10.0" style="width: 60px; background: var(--bg-body); color: var(--text-main); border: 1px solid var(--border-color); border-radius: 4px; padding: 2px 4px;">
+                </label>
+
+                <label style="display: flex; justify-content: space-between; align-items: center; font-size: 13px; margin-bottom: 10px;">
+                    Pull Radius:
+                    <input type="number" id="input-pull-radius" value="220" style="width: 60px; background: var(--bg-body); color: var(--text-main); border: 1px solid var(--border-color); border-radius: 4px; padding: 2px 4px;">
+                </label>
+
+                <div id="btn-cull-stars" style="text-align: center; padding: 6px; background: var(--bg-subtle, rgba(0, 0, 0, 0.04)); border: 1px solid var(--border-color); border-radius: 4px; cursor: pointer; font-size: 13px; transition: background 0.2s;">
+                    Cull 50 Stars
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <script src="scripts/background.js"></script>
+    <script src="scripts/navigation.js"></script>
+    <script src="scripts/center.js"></script>
+    <script src="scripts/bottom.js"></script>
+    <script defer src="scripts/slideshow.js"></script>
+    <script defer src="scripts/mouse.js"></script>
+    <script defer src="scripts/theme.js"></script>
+</body>
+</html>
