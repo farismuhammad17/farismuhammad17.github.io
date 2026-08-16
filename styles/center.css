@@ -36,6 +36,9 @@
     min-height: 0;
     overflow-y: auto;
     padding-right: 4px;
+    /* Firefox Scrollbar Support */
+    scrollbar-width: thin;
+    scrollbar-color: var(--border-color) transparent;
 }
 
 .pane-scroll-content {
@@ -47,12 +50,16 @@
     overflow-y: auto;
     padding-right: 4px;
     margin-top: 0.3rem;
+    /* Firefox Scrollbar Support */
+    scrollbar-width: thin;
+    scrollbar-color: var(--border-color) transparent;
 }
 
 .pane-scroll-content > * + * {
     margin-top: 0.75rem;
 }
 
+/* --- WebKit Scrollbars (Chrome, Edge, Safari) --- */
 .project-list::-webkit-scrollbar,
 .achievement-list::-webkit-scrollbar,
 .link-list::-webkit-scrollbar,
@@ -127,6 +134,9 @@
     min-height: 0;
     flex: 1;
     gap: 0.5rem;
+    /* Firefox Scrollbar Support */
+    scrollbar-width: thin;
+    scrollbar-color: var(--border-color) transparent;
 }
 
 #about.active {
