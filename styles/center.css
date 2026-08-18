@@ -206,6 +206,41 @@
     border: 1px solid var(--border-color);
 }
 
+.project-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 0.5rem;
+}
+
+.project-title {
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--text-main, #fff);
+    text-decoration: none;
+}
+
+.project-title:hover {
+    text-decoration: underline;
+}
+
+/* Pushed to the far right */
+.proj-link-badge.live {
+    color: var(--accent);
+    font-family: monospace;
+    font-size: 0.65rem;
+    background: rgba(var(--accent-rgb), 0.08);
+    padding: 0.05rem 0.35rem;
+    border-radius: 4px;
+    border: 1px solid var(--border-color);
+    text-decoration: none;
+    transition: all 0.2s ease;
+}
+
+.proj-link-badge.live:hover {
+    border-color: var(--accent);
+}
+
 /* --- Achievements --- */
 
 .achievement-item[data-target-pane] {
