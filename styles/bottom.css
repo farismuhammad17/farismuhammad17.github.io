@@ -83,60 +83,6 @@
     background-color: rgba(59, 130, 246, 0.1);
 }
 
-/* --- Music --- */
-
-.music-player {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-}
-
-.track-info {
-    display: flex;
-    flex-direction: column;
-    gap: 0.15rem;
-}
-
-.track-title {
-    font-size: 0.9rem;
-    font-weight: 600;
-    color: var(--text-main);
-}
-
-.track-status {
-    font-size: 0.75rem;
-    color: var(--text-muted);
-}
-
-.player-controls {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-}
-
-#volume-slider {
-    accent-color: var(--accent);
-    cursor: pointer;
-    width: 80px;
-}
-
-.visualizer-container {
-    display: flex;
-    justify-content: center;
-    flex-grow: 1;
-    margin: 0 5px;
-}
-
-#visualizer {
-    width: 100%;
-    max-width: 280px;
-    height: 40px;
-    background: transparent;
-    border: none;
-    display: block;
-}
-
 /* --- License --- */
 
 .license-content {

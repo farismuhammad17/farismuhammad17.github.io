@@ -84,6 +84,24 @@
                             <span class="project-license">Apache 2.0</span>
                         </div>
                     </div>
+
+                    <div class="project-item">
+                        <img src="assets/images/homehub-banner.png" alt="HomeHub Banner" class="project-banner">
+                        <div class="project-header-row">
+                            <a href="https://github.com/farismuhammad17/HomeHub" target="_blank" class="project-title">HomeHub</a>
+                        </div>
+                        <span class="project-desc">A local Home Control Center built for the Raspberry Pi.</span>
+
+                        <div class="project-meta">
+                            <div class="project-tags">
+                                <span class="proj-tag">Python</span>
+                                <span class="proj-tag">HTML</span>
+                                <span class="proj-tag">CSS</span>
+                                <span class="proj-tag">JavaScript</span>
+                            </div>
+                            <span class="project-license">GNU AGPL v3</span>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -92,13 +110,13 @@
                 <p class="subtitle">Click any point to learn more</p>
                 <div class="achievement-list">
                     <div class="achievement-item" data-target-pane="ach-codewars" onclick="window.setSlideKey(1)">
-                        HPE CodeWars (25th July, 2026): 8th position
+                        HPE CodeWars: 8th position (25th July, 2026)
                     </div>
                     <div class="achievement-item" data-target-pane="ach-hacknexus" onclick="window.setSlideKey(2)">
-                        Hacknexus (8th August, 2026): 1st position
+                        Hacknexus: 1st position (8th August, 2026)
                     </div>
                     <div class="achievement-item" data-target-pane="ach-rhetorica" onclick="window.setSlideKey(0)">
-                        Rhetorica (14th August, 2026): 2nd position
+                        Rhetorica: 2nd position (14th August, 2026)
                     </div>
                 </div>
             </div>
@@ -164,33 +182,12 @@
 
         <div id="bottom-wide" class="island">
             <div class="bottom-tabs">
-                <button class="tab-btn active" data-target="tab-music">Music</button>
-                <button class="tab-btn" data-target="tab-tech">Tech Stack</button>
+                <button class="tab-btn active" data-target="tab-tech">Tech Stack</button>
                 <button class="tab-btn" data-target="tab-license">License</button>
             </div>
 
             <div class="tab-content-container">
-                <div id="tab-music" class="tab-pane active">
-                    <div class="music-player">
-                        <div class="track-info">
-                            <span class="track-title">Background Music</span>
-                            <span class="track-status" id="play-status">Auto-playing</span>
-                        </div>
-                        <div class="visualizer-container">
-                            <canvas id="visualizer" width="260" height="40"></canvas>
-                        </div>
-                        <div class="player-controls">
-                            <label for="volume-slider" class="volume-label">Vol:</label>
-                            <input type="range" id="volume-slider" min="0" max="1" step="0.05" value="0.2">
-                        </div>
-                        <audio id="bg-audio" loop>
-                            <source src="assets/audios/bgm.mp3" type="audio/mpeg">
-                            Your browser does not support the audio element.
-                        </audio>
-                    </div>
-                </div>
-
-                <div id="tab-tech" class="tab-pane">
+                <div id="tab-tech" class="tab-pane active">
                     <div class="tech-stack-grid">
                         <div class="tech-badge">C</div>
                         <div class="tech-badge">C++</div>
