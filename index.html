@@ -3,290 +3,304 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Faris Muhammad | Portfolio</title>
+    <title>Faris Muhammad</title>
 
-    <meta property="title" content="Faris Muhammad | Kernel C Developer">
-    <meta property="description" content="Portfolio page of Faris Muhammad.">
     <meta name="author" content="Faris Muhammad">
-    <meta property="image" content="assets/images/icon.png">
-    <meta name="keywords" content="Faris, Farix, Kernel, Systems Programming, Assembly, Web Portfolio">
-    <meta name="theme-color" content="#121212">
-    <link rel="icon" type="image/png" href="assets/images/icon.png">
+    <link rel="icon" type="image/png" href="assets/icon.png">
 
-    <link rel="stylesheet" href="styles/main.css">
-    <link rel="stylesheet" href="styles/bottom.css">
-    <link rel="stylesheet" href="styles/center.css">
-    <link rel="stylesheet" href="styles/navigation.css">
-    <link rel="stylesheet" href="styles/right.css">
-    <link rel="stylesheet" href="styles/mouse.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Reem+Kufi:wght@700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <canvas id="starfield"></canvas>
+    <canvas id="circuitCanvas"></canvas>
 
-    <div id="center">
-        <div id="selector" class="island">
-            <h3>Navigation</h3>
-            <div class="button-group">
-                <button class="nav-btn active" data-target="about" onclick="window.setSlideKey(0)">About</button>
-                <button class="nav-btn" data-target="projects">Projects</button>
-                <button class="nav-btn" data-target="achievements">Achievements</button>
-                <button class="nav-btn" data-target="links">Links</button>
-                <button class="nav-btn" data-target="contact">Contact</button>
+    <div id="contentOverlay">
+        <div class="page active" data-page="0">
+            <h1>Faris Muhammad • <span class="arabic">فَارِس مُحَمَّد</span></h1>
+
+            <p>
+                Hi! I'm a <span id="age">(My age is supposed to be dynamically inserted here)</span> year
+                old programmer, currently in Bangalore, India, though I was previously situated in Sharjah,
+                UAE and Muscat, Oman. I started programming in Python since I was 9, hence the highly
+                ambitious portfolio and array of projects.
+            </p>
+
+            <div class="tech-stack">
+                <span class="tech-tag">
+                    <img src="assets/logo_py.png" alt="Python" class="tech-icon"> Python
+                </span>
+                <span class="tech-tag">
+                    <img src="assets/logo_c.png" alt="C" class="tech-icon"> C
+                </span>
+                <span class="tech-tag">
+                    <img src="assets/logo_cpp.png" alt="C++" class="tech-icon"> C++
+                </span>
+                <span class="tech-tag">
+                    <img src="assets/logo_asm.png" alt="ASM" class="tech-icon"> ASM
+                </span>
+                <span class="tech-tag">
+                    <img src="assets/logo_html.png" alt="HTML" class="tech-icon"> HTML
+                </span>
+                <span class="tech-tag">
+                    <img src="assets/logo_css.png" alt="CSS" class="tech-icon"> CSS
+                </span>
+                <span class="tech-tag">
+                    <img src="assets/logo_js.png" alt="JavaScript" class="tech-icon"> JavaScript
+                </span>
+                <span class="tech-tag">
+                    <img src="assets/logo_mysql.png" alt="MySQL" class="tech-icon"> MySQL
+                </span>
+                <span class="tech-tag">
+                    <img src="assets/logo_flask.png" alt="Flask" class="tech-icon"> Flask
+                </span>
+                <span class="tech-tag">
+                    <img src="assets/logo_tensorflow.png" alt="TensorFlow" class="tech-icon"> TensorFlow
+                </span>
+                <span class="tech-tag">
+                    <img src="assets/logo_electron.png" alt="Electron" class="tech-icon"> Electron
+                </span>
+                <span class="tech-tag">
+                    <img src="assets/logo_pylint.png" alt="Pylint" class="tech-icon"> Pylint
+                </span>
+                <span class="tech-tag">
+                    <img src="assets/logo_pytest.png" alt="Pytest" class="tech-icon"> Pytest
+                </span>
+                <span class="tech-tag">
+                    <img src="assets/logo_tailscale.png" alt="Tailscale" class="tech-icon"> Tailscale
+                </span>
             </div>
+
+            <h2>Site Navigation</h2>
+
+            <p>
+                Use the [+] / [-] buttons at the top to increment or decrement the 8-bit value respectively,
+                which represents the current page number. The 8-bit full adder circuit was designed in raw
+                JavaScript using an HTML canvas, hence why it looks like that. You can also toggle the bits
+                (left-click) to navigate pages (assuming you know binary).
+            </p>
         </div>
 
-        <div id="text-widget" class="island">
-            <div id="about" class="nav-pane active">
-                <h2>Faris Muhammad • فارس محمد</h2>
-                <p class="subtitle">Kernel C Developer</p>
-                <p class="bio"><b>Hi!</b> I'm a <span id="age"><i><b>(my age was supposed to be here, browser issues probably)</b></i></span>-year-old programmer <i>(started at 9)</i> exploring and building the mechanics of operating systems. Currently, I'm dabbling into hardware tinkerings, Raspberry PIs and such. The rest of the paragraphs in this section are just about me, and unrelated to my programming abilities.</p>
+        <div class="page" data-page="1">
+            <h1>Farix OS</h1>
 
-                <p class="about-title">Background & Education</p>
-                <p class="bio">I studied in Sharjah Indian School, <b>UAE</b>, till class 7, continued my education in Indian School al Maabela, <b>Oman</b>, till 11th, and continued 12th in National Centre for Excellence, in <b>Bangalore</b>.</p>
-
-                <p class="about-title">Language Journey</p>
-                <p class="bio">Python was my first language, which I picked up when I was 9, after which, I continued into Java, but found it boring. Currently, I am into C, developing my own Operating System and other personal projects.</p>
-                <p class="bio">One of the best things about Bangalore, in comparison to Oman, is, as far as I can see, there are a lot more competitions here, letting me express my abilities in programming more. Such activities help one delve further into programming, rewards one for it, and helps build actual team experience.</p>
+            <div class="tech-stack">
+                <span class="tech-tag">
+                    <img src="assets/logo_c.png" alt="C" class="tech-icon"> C
+                </span>
+                <span class="tech-tag">
+                    <img src="assets/logo_asm.png" alt="ASM" class="tech-icon"> ASM
+                </span>
+                <span class="tech-tag">
+                    <img src="assets/logo_py.png" alt="Python" class="tech-icon"> Python
+                </span>
+                <span class="tech-tag">
+                    <img src="assets/logo_agplv3.png" alt="GNU AGPL v3" class="tech-icon"> GNU AGPL v3
+                </span>
             </div>
 
-            <div id="projects" class="nav-pane">
-                <h2>Projects</h2>
-                <div class="project-list">
-                    <div class="project-item">
-                        <img src="assets/images/farix-banner.png" alt="Farix OS Banner" class="project-banner">
-                        <a href="https://github.com/farismuhammad17/Farix" target="_blank" class="project-title" style="display: block; margin-top: 0.5rem;">Farix OS</a>
-                        <span class="project-desc">My 64-bit Operating System/Kernel built in C & Assembly with a custom Python "FXTools" build system.</span>
+            <p>
+                My 64-bit x86/ARM kernel built using C and Assembly.
+                The full repository is on <a href="https://github.com/farismuhammad17/Farix" target="_blank">GitHub</a> as well as my computer.
+                The core kernel is nothing but a memory manager, and the aim is to keep every driver as a literal 'file' on the hard disk.
+            </p>
+            <p>
+                Unlike other Unix operating systems, I'm trying to make it so that necessary drivers are loaded dynamically onto memory,
+                so if you don't have a keyboard to work with, the keyboard's system driver is simply not running. This is also a microkernel
+                philosophy, but it is my goal to try to make it run on kernel level, so it can keep the speed of a monolithic kernel.
+            </p>
 
-                        <div class="project-meta">
-                            <div class="project-tags">
-                                <span class="proj-tag">C</span>
-                                <span class="proj-tag">Assembly</span>
-                                <span class="proj-tag">Python</span>
-                            </div>
-                            <span class="project-license">GNU AGPL v3</span>
-                        </div>
-                    </div>
-
-                    <div class="project-item">
-                        <img src="assets/images/ledgermap-banner.png" alt="LedgerMap Banner" class="project-banner">
-                        <div class="project-header-row">
-                            <a href="https://github.com/farismuhammad17/LedgerMap" target="_blank" class="project-title">LedgerMap</a>
-                        </div>
-                        <span class="project-desc">A Desktop Financial Visualization Tool.</span>
-
-                        <div class="project-meta">
-                            <div class="project-tags">
-                                <span class="proj-tag">HTML</span>
-                                <span class="proj-tag">CSS</span>
-                                <span class="proj-tag">JavaScript</span>
-                                <span class="proj-tag">Electron</span>
-                            </div>
-                            <span class="project-license">MIT</span>
-                        </div>
-                    </div>
-
-                    <div class="project-item">
-                        <img src="assets/images/codeserver-banner.png" alt="CodeServer banner" class="project-banner">
-                        <a href="https://github.com/farismuhammad17/CodeServer" target="_blank" class="project-title" style="display: block; margin-top: 0.5rem;">CodeServer</a>
-                        <span class="project-desc">CodeServer is a C++ backend that lets you instantly host a live, collaborative code editor that friends can access from their browser.</span>
-
-                        <div class="project-meta">
-                            <div class="project-tags">
-                                <span class="proj-tag">C++</span>
-                                <span class="proj-tag">HTML</span>
-                                <span class="proj-tag">CSS</span>
-                                <span class="proj-tag">JavaScript</span>
-                            </div>
-                            <span class="project-license">Apache 2.0</span>
-                        </div>
-                    </div>
-
-                    <div class="project-item">
-                        <img src="assets/images/logicgates-banner.png" alt="LogicGates Banner" class="project-banner">
-                        <div class="project-header-row">
-                            <a href="https://github.com/farismuhammad17/LogicGates" target="_blank" class="project-title">LogicGates</a>
-                            <a href="https://farismuhammad17.github.io/LogicGates" target="_blank" class="proj-link-badge live">live ↗</a>
-                        </div>
-                        <span class="project-desc">A small, vanilla, browser Logic Gate simulator, fit with I/O nodes, buses, and styled for learners.</span>
-
-                        <div class="project-meta">
-                            <div class="project-tags">
-                                <span class="proj-tag">HTML</span>
-                                <span class="proj-tag">CSS</span>
-                                <span class="proj-tag">JavaScript</span>
-                            </div>
-                            <span class="project-license">Apache 2.0</span>
-                        </div>
-                    </div>
-
-                    <div class="project-item">
-                        <img src="assets/images/homehub-banner.png" alt="HomeHub Banner" class="project-banner">
-                        <div class="project-header-row">
-                            <a href="https://github.com/farismuhammad17/HomeHub" target="_blank" class="project-title">HomeHub</a>
-                        </div>
-                        <span class="project-desc">A local Home Control Center built for the Raspberry Pi.</span>
-
-                        <div class="project-meta">
-                            <div class="project-tags">
-                                <span class="proj-tag">Python</span>
-                                <span class="proj-tag">HTML</span>
-                                <span class="proj-tag">CSS</span>
-                                <span class="proj-tag">JavaScript</span>
-                            </div>
-                            <span class="project-license">GNU AGPL v3</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div id="achievements" class="nav-pane">
-                <h2>Achievements</h2>
-                <p class="subtitle">Click any point to learn more</p>
-                <div class="achievement-list">
-                    <div class="achievement-item" data-target-pane="ach-codewars" onclick="window.setSlideKey(1)">
-                        HPE CodeWars: 8th position (25th July, 2026)
-                    </div>
-                    <div class="achievement-item" data-target-pane="ach-hacknexus" onclick="window.setSlideKey(2)">
-                        Hacknexus: 1st position (8th August, 2026)
-                    </div>
-                    <div class="achievement-item" data-target-pane="ach-rhetorica" onclick="window.setSlideKey(0)">
-                        Rhetorica: 2nd position (14th August, 2026)
-                    </div>
-                </div>
-            </div>
-            <div id="ach-codewars" class="nav-pane">
-                <button class="back-btn" data-target-pane="achievements">← Back to Achievements</button>
-                <h2>HPE CodeWars 2026</h2>
-                <div class="pane-scroll-content">
-                    <p class="subtitle">Hewlett-Packard Enterprise • 8th Position • 25th July, 2026</p>
-                    <p>Organised in Bangalore in 2026, it was a big competition, where many race to solve <b>30 or-so questions within the limited time</b> given using <b>Python, Java, C, or C++</b>. The questions progress in difficulty, and harder questions earn more points.</p>
-                    <p>I had joined my new school in Bangalore less than a month ago, and of perhaps <b>130-140 teams</b>, my team, of three high-schoolers, placed <b>8th</b>. It was the first competition I attended, and I was happy with the outcome. I had no preparation, and I accept it.</p>
-                </div>
-            </div>
-            <div id="ach-hacknexus" class="nav-pane">
-                <button class="back-btn" data-target-pane="achievements">← Back to Achievements</button>
-                <h2>Hacknexus</h2>
-                <div class="pane-scroll-content">
-                    <p class="subtitle">National Public School ITPL • 1st Position • 8th August, 2026</p>
-                    <p>A Hackathon under the name "Hacknexus". You are provided a set of <b>10 questions</b> to solve within <b>90 minutes</b>. I solved them in 40.</p>
-                    <p>Placing <b>1st</b>, I got the school a trophy, myself a certificate and a cheque for 5000 INR. The money was not of my concern and went to my father, for my concern was merely that I had won. I had, once again, no preparation (no clue how to).</p>
-                    <p>Additionally, NPS's Principal was happy to have me and told me "continue on my path" and "do what I do and keep growing" or something along those lines.</p>
-                </div>
-            </div>
-            <div id="ach-rhetorica" class="nav-pane">
-                <button class="back-btn" data-target-pane="achievements">← Back to Achievements</button>
-                <h2>Rhetorica</h2>
-                <div class="pane-scroll-content">
-                    <p class="subtitle">National Centre for Excellence • 2nd Position • 14th August, 2026</p>
-                    <p>Rhetorica is a collection of events, one of which was a Hackathon. This greatly differed from the earlier competitions I had attended, since those were pure coding challenges. This, on the other hand, constituted multiple rounds to test participants':</p>
-
-                    <ul>
-                      <li><b>Programming Skills <i>(30, 20, 5 minutes each question)</i>:</b> Three programming questions to solve, similar to the earlier competitions.</li>
-                      <li><b>Creative problem solving <i>(45 minutes)</i>:</b> Designed ultrasonic animal-deterrent sensor network for railway tracks.</li>
-                      <li><b>Robotics <i>(40 minutes)</i>:</b> Participants were allowed to observe a given "road" to build a simple contraption with simple material to be a sort of "car" capable of traversing through it. We were unfortunately inadequately provided materials, hence given an additional 10 minutes with the aforementioned missing materials we were initially unaware of (figured from others' creations). The final creation worked well, far better than we expected.</li>
-                      <li><b>Presentation skills <i>(45 minutes)</i>:</b> "Helmet that serves to help Cyclists' safety." Participants had to create a presentation of 5 slides (max) and speak on the solution that they come up with. We thought of infrared cameras to see in the dark; engines and warm blood are hot enough to be seen, even when dark, using which, we can improve night cycling safety.</li>
-                    </ul>
-
-                    <p>I arrived at the school at 8 am, and left at 7 pm, and stayed for so long, as our team of three had won <b>2nd</b> place.</p>
-                </div>
-            </div>
-
-            <div id="links" class="nav-pane">
-                <h2>Links</h2>
-                <div class="link-list">
-                    <div class="link-item">
-                        <a href="https://github.com/farismuhammad17" target="_blank">GitHub</a>
-                        <span class="link-desc">Where I stash my source codes</span>
-                    </div>
-                    <div class="link-item">
-                        <a href="https://leetcode.com/u/FarisMuhammad/" target="_blank">LeetCode</a>
-                        <span class="link-desc">I sometimes do it when I'm bored.</span>
-                    </div>
-                </div>
-            </div>
-
-            <div id="contact" class="nav-pane">
-                <h2>Contact</h2>
-                <p class="subtitle">I'm introverted</p>
-                <div class="contact-list">
-                    <div class="contact-item">Email: <a href="mailto:farismuhd172009@gmail.com">farismuhd172009@gmail.com</a></div>
-                </div>
-            </div>
+            <h2>FXTools</h2>
+            <p>
+                The build process was initially done using a standard GNU Makefile, but this grew weary over me. The tab requirement, the
+                completely unreadability, and the fact I kept asking an LLM on how to fix a bug everytime I changed it was a pain. Hence,
+                the build process is entirely managed by a Python CLI "library" called 'FXTools'. It's basically a standardised function
+                router.
+            </p>
+            <p>
+                Every command in FXTools is really a file with a 'run' function that takes the necessary arguments. When you run the main
+                FXTools program, it finds your file, imports the function, and executes it. It is significantly more modular than any other
+                make system I know and significantly more fun to develop.
+            </p>
         </div>
 
-        <div id="bottom-wide" class="island">
-            <div class="bottom-tabs">
-                <button class="tab-btn active" data-target="tab-tech">Tech Stack</button>
-                <button class="tab-btn" data-target="tab-license">License</button>
+        <div class="page" data-page="2">
+            <h1>LogicGates</h1>
+
+            <div class="tech-stack">
+                <span class="tech-tag">
+                    <img src="assets/logo_html.png" alt="HTML" class="tech-icon"> HTML
+                </span>
+                <span class="tech-tag">
+                    <img src="assets/logo_css.png" alt="CSS" class="tech-icon"> CSS
+                </span>
+                <span class="tech-tag">
+                    <img src="assets/logo_js.png" alt="JavaScript" class="tech-icon"> JavaScript
+                </span>
+                <span class="tech-tag">
+                    <img src="assets/logo_apache2.png" alt="Apache 2.0" class="tech-icon"> Apache 2.0
+                </span>
             </div>
 
-            <div class="tab-content-container">
-                <div id="tab-tech" class="tab-pane active">
-                    <div class="tech-stack-grid">
-                        <div class="tech-badge">C</div>
-                        <div class="tech-badge">C++</div>
-                        <div class="tech-badge">Assembly</div>
-                        <div class="tech-badge">Python</div>
-                        <div class="tech-badge">HTML</div>
-                        <div class="tech-badge">CSS</div>
-                        <div class="tech-badge">JavaScript</div>
-                        <div class="tech-badge">Git</div>
-                        <div class="tech-badge">GCC</div>
-                    </div>
-                </div>
+            <p>
+                A small, vanilla, browser Logic Gate simulator, fit with I/O nodes, buses, and styled for learners.
+                The entire thing is purely frontend, and, hence, always <a href="https://farismuhammad17.github.io/LogicGates/" target="_blank">available</a>
+                on a browser, though the full repository can be found on <a href="https://github.com/farismuhammad17/LogicGates/" target="_blank">GitHub</a>.
+            </p>
 
-                <div id="tab-license" class="tab-pane">
-                    <div class="license-content">
-                        <p>Copyright (c) 2026 Faris Muhammad. External media is utilized under Creative Commons licensing principles. Images do not feature any person other than myself. Additional information in source <a href="https://github.com/farismuhammad17/farismuhammad17.github.io/" target="_blank">repository</a>.</p>
-                    </div>
-                </div>
-            </div>
+            <img src="assets/logicgates_demo.png" alt="A full adder circuit on LogicGates" />
+
+            <p>
+                This is a full-adder circuit designed inside LogicGates. Perhaps the above image and the rest of this site
+                clash on the theme, that is because this portfolio was designed using repurposed code from LogicGates.
+            </p>
+
+            <p>
+                Of course, the code was modified for this site: the blocks and nodes cannot be moved, you cannot zoom in/out,
+                you cannot rewire the circuit (it would break the site, probably), and some stylistic changes were made as well.
+            </p>
+
+            <h2>Features</h2>
+
+            <ul>
+                <li><strong>Logic Gates:</strong> Obviously, the program allows the creation and deletion of all 6 gates, namely:
+                    AND, OR, NOT, NOR, NAND, and XOR.</li>
+                <li><strong>Clean Wires:</strong> The wires properly twist and bend as you drag it from the input to output nodes.</li>
+                <li><strong>I/O:</strong> You can connect wires to input and output nodes that create or display the current inflow value.</li>
+            </ul>
+
+            <h2>Controls</h2>
+
+            <p>'N' to create a new element and 'D' to toggle delete mode.</p>
         </div>
 
-        <div id="right-tall" class="island">
-            <img alt="Images Slideshow">
-            <div class="slide-overlay-card">
-                <h4 id="slide-title"></h4>
-                <p id="slide-desc"></p>
+        <div class="page" data-page="3">
+            <h1>LedgerMap</h1>
+
+            <div class="tech-stack">
+                <span class="tech-tag">
+                    <img src="assets/logo_html.png" alt="HTML" class="tech-icon"> HTML
+                </span>
+                <span class="tech-tag">
+                    <img src="assets/logo_css.png" alt="CSS" class="tech-icon"> CSS
+                </span>
+                <span class="tech-tag">
+                    <img src="assets/logo_js.png" alt="JavaScript" class="tech-icon"> JavaScript
+                </span>
+                <span class="tech-tag">
+                    <img src="assets/logo_electron.png" alt="Electron" class="tech-icon"> Electron
+                </span>
+                <span class="tech-tag">
+                    <img src="assets/logo_mit.png" alt="MIT" class="tech-icon"> MIT
+                </span>
             </div>
+
+            <p>
+                Planning out finances for a future after secondary education is a pain, considering I've been in school
+                for as long as I can remember. I build <a href="https://github.com/farismuhammad17/LedgerMap" target="_blank">LedgerMap</a>
+                to take in input values for these expenses and give out a graph where I can see the trend of the money inflow and outflow.
+            </p>
+
+            <img src="assets/ledgermap_demo1.png" alt="Graph demo" />
+
+            <p>
+                The program generates these graphs without any libraries. To get the UI to be exactly as I wanted it, we use
+                a canvas to manually draw rectangles of the required dimensions.
+            </p>
+
+            <h2>Inputs</h2>
+
+            <p>
+                The program lets the user input in how their money moves. These inputs may be a positive value, which indicates
+                inflow of money (e.g. salary), or negative, which indicates outflow (e.g. payments). The inputs may only occur
+                once at a given date, or it may be recurring every so period of time, or it might be like an intrest. All these
+                types of inflows and outflows are graphed by LedgerMap.
+            </p>
+
+            <img src="assets/ledgermap_demo2.png" alt="Inputs demo" />
+        </div>
+
+        <div class="page" data-page="4">
+            <h1>Detrace</h1>
+
+            <div class="tech-stack">
+                <span class="tech-tag">
+                    <img src="assets/logo_py.png" alt="Python" class="tech-icon"> Python
+                </span>
+                <span class="tech-tag">
+                    <img src="assets/logo_tensorflow.png" alt="TensorFlow" class="tech-icon"> TensorFlow
+                </span>
+                <span class="tech-tag">
+                    <img src="assets/logo_pylint.png" alt="Pylint" class="tech-icon"> Pylint
+                </span>
+                <span class="tech-tag">
+                    <img src="assets/logo_pytest.png" alt="Pytest" class="tech-icon"> Pytest
+                </span>
+                <span class="tech-tag">
+                    <img src="assets/logo_apache2.png" alt="Apache 2.0" class="tech-icon"> Apache 2.0
+                </span>
+            </div>
+
+            <p>
+                A CLI tool designed specially for cryptanalysis as an entropy reduction engine. Using a
+                Machine Learning model, created using TensorFlow, it identifies the likelihood of each
+                cipher algorithm, provided the cipher text. It then attempts to decrypt the text, iteratively
+                running through the predictions. The program is also capable of decrypting ciphers with
+                multiple layers to it.
+            </p>
+
+            <p>
+                <a href="https://github.com/farismuhammad17/Detrace" target="_blank">Detrace</a> was designed
+                with the goal that it be as advanced of a cryptanalysis tool as it can be. The entropy reduction
+                part is secondary, and tags along as the system evolves.
+            </p>
+
+            <div class="code-block">$ detrace decrypt \
+> --text "54564a45566b30325645564a546b4a4551566454575535425755453950543039" \
+> --model model/main --dictionary data/dictionary.txt
+
+Target: 54564a45566b30325645564a546b4a4551566454575535425755453950543039
+================================================================================
+ Layers:     4
+ Status:     Success
+--------------------------------------------------------------------------------
+ [1] HEX          -> TVJEVk02VEVJTkJEQVdTWU5BWUE9PT09
+ [2] BASE64       -> MRDVM6TEINBDAWSYNAYA====
+ [3] BASE32       -> dGVzdCB0ZXh0
+ [4] BASE64       -> test text
+================================================================================
+ SOLUTION: test text
+================================================================================</div>
+
+            <p>
+                Detrace verifies if its output is correct by checking each word against a dictionary of valid
+                words provided. If the result is past the threshold, the program assumes it to be valid plaintext.
+                Multiple commands are available as part of the CLI for different types of operations.
+            </p>
+        </div>
+
+        <div class="page" data-page="default">
+            <h1>Memory Address <span id="current-addr">0x00</span></h1>
+            <p>ERROR : Unallocated memory address.</p>
         </div>
     </div>
 
-    <div id="custom-menu" class="context-menu" hidden>
-        <ul>
-            <li id="menu-theme">Theme: Dark</li>
+    <script src="main.js"></script>
 
-            <li class="menu-group" style="padding: 8px 16px; cursor: default;">
-                <div style="font-size: 11px; font-weight: bold; margin-bottom: 6px; opacity: 0.7;">STAR CONTROLS</div>
+    <script>
+        const birthDate = new Date(Date.UTC(2009, 9, 17));
+        const today = new Date();
 
-                <label style="display: flex; justify-content: space-between; align-items: center; font-size: 13px; margin-bottom: 8px;">
-                    Blast Radius:
-                    <input type="number" id="input-blast-radius" value="350" style="width: 60px; background: var(--bg-body); color: var(--text-main); border: 1px solid var(--border-color); border-radius: 4px; padding: 2px 4px;">
-                </label>
+        let age = today.getUTCFullYear() - birthDate.getUTCFullYear();
+        const monthDifference = today.getUTCMonth() - birthDate.getUTCMonth();
 
-                <label style="display: flex; justify-content: space-between; align-items: center; font-size: 13px; margin-bottom: 8px;">
-                    Blast Power:
-                    <input type="number" step="0.5" id="input-blast-strength" value="10.0" style="width: 60px; background: var(--bg-body); color: var(--text-main); border: 1px solid var(--border-color); border-radius: 4px; padding: 2px 4px;">
-                </label>
+        if (monthDifference < 0 || (monthDifference === 0 && today.getUTCDate() < birthDate.getUTCDate())) {
+            age--;
+        }
 
-                <label style="display: flex; justify-content: space-between; align-items: center; font-size: 13px; margin-bottom: 10px;">
-                    Pull Radius:
-                    <input type="number" id="input-pull-radius" value="220" style="width: 60px; background: var(--bg-body); color: var(--text-main); border: 1px solid var(--border-color); border-radius: 4px; padding: 2px 4px;">
-                </label>
-
-                <div id="btn-cull-stars" style="text-align: center; padding: 6px; background: var(--bg-subtle, rgba(0, 0, 0, 0.04)); border: 1px solid var(--border-color); border-radius: 4px; cursor: pointer; font-size: 13px; transition: background 0.2s;">
-                    Cull 50 Stars
-                </div>
-            </li>
-        </ul>
-    </div>
-
-    <script src="scripts/background.js"></script>
-    <script src="scripts/navigation.js"></script>
-    <script src="scripts/center.js"></script>
-    <script src="scripts/bottom.js"></script>
-    <script defer src="scripts/slideshow.js"></script>
-    <script defer src="scripts/mouse.js"></script>
-    <script defer src="scripts/theme.js"></script>
+        document.getElementById('age').textContent = age;
+    </script>
 </body>
 </html>

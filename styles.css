@@ -1,0 +1,237 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    background-color: #000000;
+    color: #ffffff;
+    font-family: 'Courier New', Courier, monospace;
+    min-height: 2400px;
+    position: relative;
+    overflow-x: hidden;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+html::-webkit-scrollbar, body::-webkit-scrollbar {
+    display: none;
+}
+
+#circuitCanvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+#contentOverlay {
+    position: sticky;
+    top: 22vh;
+    margin-left: 52vw;
+    width: 42vw;
+    z-index: 5;
+    pointer-events: none;
+}
+
+#contentOverlay > * {
+    pointer-events: auto;
+}
+
+.arabic {
+    font-family: 'Reem Kufi';
+    font-weight: 700;
+    letter-spacing: 0px;
+    direction: rtl;
+}
+
+.page {
+    display: none;
+}
+
+.page.active {
+    display: block;
+}
+
+/* Page sub objects */
+
+.page h1 {
+    font-size: clamp(28px, 2.5vw, 40px);
+    font-weight: bold;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    color: #ffffff;
+    letter-spacing: -0.5px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.page h2 {
+    font-size: clamp(22px, 2vw, 32px);
+    font-weight: bold;
+    margin-top: 24px;
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    color: #c4c4c4;
+    letter-spacing: -0.3px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.page h3 {
+    font-size: clamp(18px, 1.6vw, 24px);
+    font-weight: bold;
+    margin-top: 20px;
+    margin-bottom: 12px;
+    color: #ffffff;
+}
+
+.page h4 {
+    font-size: clamp(16px, 1.3vw, 20px);
+    font-weight: bold;
+    margin-top: 16px;
+    margin-bottom: 10px;
+    color: #e0e0e0;
+}
+
+.page h5 {
+    font-size: clamp(14px, 1.1vw, 17px);
+    font-weight: bold;
+    margin-top: 14px;
+    margin-bottom: 8px;
+    color: #00ff66;
+}
+
+.page h6 {
+    font-size: clamp(12px, 1vw, 15px);
+    font-weight: bold;
+    margin-top: 12px;
+    margin-bottom: 6px;
+    color: #888888;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.page p {
+    font-size: clamp(14px, 1.1vw, 17px);
+    line-height: 1.7;
+    color: #ffffff;
+    margin-bottom: 16px;
+}
+
+.page a {
+    display: inline-flex;
+    align-items: center;
+    font-family: 'Courier New', Courier, monospace;
+    color: #00ff66;
+    text-decoration: none;
+    transition: 0.2s ease;
+}
+
+.page a:hover {
+    color: #cccccc;
+}
+
+.page img {
+    width: 100%;
+    object-fit: cover;
+    border: 0;
+    margin: 18px 0;
+    display: block;
+}
+
+.page ul,
+.page ol {
+    margin: 16px 0 16px 20px;
+    padding: 0;
+}
+
+.page li {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: clamp(14px, 1.1vw, 17px);
+    line-height: 1.7;
+    color: #cccccc;
+    margin-bottom: 8px;
+}
+
+.page li code {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 0.9em;
+    color: #ffffff;
+}
+
+/* Tech Stack Blocks */
+
+.tech-stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 16px 0;
+}
+
+.tech-tag {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    padding: 4px 10px;
+    height: 28px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 6px;
+    color: #cccccc;
+    white-space: nowrap;
+    box-sizing: border-box;
+    transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.tech-tag img,
+.tech-icon {
+    width: 14px !important;
+    height: 14px !important;
+    min-width: 14px !important;
+    min-height: 14px !important;
+    max-width: 14px !important;
+    max-height: 14px !important;
+    object-fit: contain !important;
+    display: inline-block !important;
+    margin: 0 !important;
+    border: none !important;
+    padding: 0 !important;
+}
+
+.tech-tag:hover {
+    border-color: #00ff66 !important;
+    color: #ffffff !important;
+}
+
+/* Code Block */
+
+.code-block {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: clamp(12px, 1vw, 14px);
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 6px;
+    padding: 16px;
+    color: #e0e0e0;
+    white-space: pre;
+    overflow-x: auto;
+    margin: 18px 0;
+    line-height: 1.6;
+}
+
+.code-block::-webkit-scrollbar {
+    height: 6px;
+}
+.code-block::-webkit-scrollbar-track {
+    background: transparent;
+}
+.code-block::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 3px;
+}
