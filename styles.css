@@ -19,6 +19,14 @@ html::-webkit-scrollbar, body::-webkit-scrollbar {
     display: none;
 }
 
+::selection {
+    color: #00ff66;
+}
+
+::-moz-selection {
+    color: #00ff66;
+}
+
 #circuitCanvas {
     position: absolute;
     top: 0;

@@ -107,22 +107,19 @@
                 The core kernel is nothing but a memory manager, and the aim is to keep every driver as a literal 'file' on the hard disk.
             </p>
             <p>
-                Unlike other Unix operating systems, I'm trying to make it so that necessary drivers are loaded dynamically onto memory,
-                so if you don't have a keyboard to work with, the keyboard's system driver is simply not running. This is also a microkernel
+                Unlike other Unix operating systems, necessary drivers are loaded dynamically onto memory. This is also the microkernel
                 philosophy, but it is my goal to try to make it run on kernel level, so it can keep the speed of a monolithic kernel.
             </p>
 
             <h2>FXTools</h2>
             <p>
-                The build process was initially done using a standard GNU Makefile, but this grew weary over me. The tab requirement, the
-                completely unreadability, and the fact I kept asking an LLM on how to fix a bug everytime I changed it was a pain. Hence,
-                the build process is entirely managed by a Python CLI "library" called 'FXTools'. It's basically a standardised function
-                router.
+                The build process was initially done using a standard GNU Makefile, but this grew weary over me (tabs only is annoying).
+                Hence, the build process is entirely managed by a Python CLI "library" called 'FXTools'. It's basically a standardised
+                function router.
             </p>
             <p>
                 Every command in FXTools is really a file with a 'run' function that takes the necessary arguments. When you run the main
-                FXTools program, it finds your file, imports the function, and executes it. It is significantly more modular than any other
-                make system I know and significantly more fun to develop.
+                FXTools program, it finds your file, imports the function, and executes it. The modularity helps maintain it easier.
             </p>
         </div>
 
@@ -159,7 +156,7 @@
 
             <p>
                 Of course, the code was modified for this site: the blocks and nodes cannot be moved, you cannot zoom in/out,
-                you cannot rewire the circuit (it would break the site, probably), and some stylistic changes were made as well.
+                you cannot rewire the circuit (it would break this site, probably), and some stylistic changes were made as well.
             </p>
 
             <h2>Features</h2>
@@ -199,15 +196,15 @@
 
             <p>
                 Planning out finances for a future after secondary education is a pain, considering I've been in school
-                for as long as I can remember. I build <a href="https://github.com/farismuhammad17/LedgerMap" target="_blank">LedgerMap</a>
+                for as long as I can remember. I built <a href="https://github.com/farismuhammad17/LedgerMap" target="_blank">LedgerMap</a>
                 to take in input values for these expenses and give out a graph where I can see the trend of the money inflow and outflow.
             </p>
 
             <img src="assets/ledgermap_demo1.png" alt="Graph demo" />
 
             <p>
-                The program generates these graphs without any libraries. To get the UI to be exactly as I wanted it, we use
-                a canvas to manually draw rectangles of the required dimensions.
+                The program generates these graphs without any libraries. To get the UI to be exactly as I wanted it,
+                a canvas was used to manually draw rectangles of the required dimensions.
             </p>
 
             <h2>Inputs</h2>
@@ -253,7 +250,7 @@
 
             <p>
                 <a href="https://github.com/farismuhammad17/Detrace" target="_blank">Detrace</a> was designed
-                with the goal that it be as advanced of a cryptanalysis tool as it can be. The entropy reduction
+                with the goal that it be as advanced of a cryptanalysis tool as I can make it. The entropy reduction
                 part is secondary, and tags along as the system evolves.
             </p>
 
@@ -278,6 +275,48 @@ Target: 54564a45566b30325645564a546b4a4551566454575535425755453950543039
                 Detrace verifies if its output is correct by checking each word against a dictionary of valid
                 words provided. If the result is past the threshold, the program assumes it to be valid plaintext.
                 Multiple commands are available as part of the CLI for different types of operations.
+            </p>
+        </div>
+
+        <div class="page" data-page="5">
+            <h1>CodeServer.py</h1>
+
+            <div class="tech-stack">
+                <span class="tech-tag">
+                    <img src="assets/logo_py.png" alt="Python" class="tech-icon"> Python
+                </span>
+                <span class="tech-tag">
+                    <img src="assets/logo_mysql.png" alt="MySQL" class="tech-icon"> MySQL
+                </span>
+                <span class="tech-tag">
+                    <img src="assets/logo_flask.png" alt="Flask" class="tech-icon"> Flask
+                </span>
+                <span class="tech-tag">
+                    <img src="assets/logo_pylint.png" alt="Pylint" class="tech-icon"> Pylint
+                </span>
+                <span class="tech-tag">
+                    <img src="assets/logo_tailscale.png" alt="Tailscale" class="tech-icon"> Tailscale
+                </span>
+                <span class="tech-tag">
+                    <img src="assets/logo_apache2.png" alt="Apache 2.0" class="tech-icon"> Apache 2.0
+                </span>
+            </div>
+
+            <p>
+                Created for my final secondary education school submission, it is a remote development environment.
+                <a href="https://github.com/farismuhammad17/CodeServer.py" target="_blank">It</a> uses Tailscale to
+                connect a "server" computer to the internet with APIs made using Flask. "Client" computers can then
+                use the Tkinter IDE to connect to the server and access it as if it were on the client's computer.
+            </p>
+
+            <img src="assets/codeserver_demo.png" alt="Project demo" />
+
+            <h2>Server Security</h2>
+
+            <p>
+                A sandbox environment is created for every client terminal, so that the actual server cannot be
+                affected by it. Furthermore, an ignore file is supported that the server can use to hide certain
+                files from being available to the clients.
             </p>
         </div>
 
