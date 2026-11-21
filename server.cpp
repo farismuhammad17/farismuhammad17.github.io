@@ -109,7 +109,7 @@ int main(int argc, char* argv[]) {
         if (fs::exists(sub_icon)) {
             return serve_file(sub_icon, "image/x-icon");
         }
-        return serve_file("favicon.ico", "image/x-icon");
+        return serve_file("assets/favicon.ico", "image/x-icon");
     });
 
     CROW_ROUTE(app, "/robots.txt")([](const crow::request& req) {
