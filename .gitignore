@@ -1,2 +1,5 @@
-deps/
-server
+/deps/
+/server
+
+# Just git clone projects in
+/git/projects/*
