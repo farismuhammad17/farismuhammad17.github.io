@@ -483,13 +483,29 @@ void git_main(crow::SimpleApp& app) {
         return serve_file(index);
     });
 
-    CROW_ROUTE(app, "/repo/<string>")
-    ([](const std::string& project) {
-        return git_project(project, "");
-    });
+    CROW_ROUTE(app, "/repo/<path>")
+    ([](const std::string& requested) {
+        fs::path path(requested);
+        if (path.empty()) return serve_error(404);
 
-    CROW_ROUTE(app, "/repo/<string>/<path>")
-    ([](const std::string& project, const std::string& requested) {
-        return git_project(project, requested);
+        std::string project = path.begin()->string();
+        if (!git_safe_project(project)) return serve_error(400);
+
+        fs::path remaining;
+
+        bool first = true;
+        for (const fs::path& part : path) {
+            if (first) {
+                first = false;
+                continue;
+            }
+
+            remaining /= part;
+        }
+
+        return git_project(
+            project,
+            remaining.empty() ? "" : remaining.generic_string()
+        );
     });
 }
