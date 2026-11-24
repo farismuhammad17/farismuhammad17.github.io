@@ -8,7 +8,7 @@
 // PRODUCTION
 // 0: Local testing / development
 // 1: Production
-#define PRODUCTION 0
+#define PRODUCTION 1
 
 #if PRODUCTION
     #define HOST "farismuhd.dev"
