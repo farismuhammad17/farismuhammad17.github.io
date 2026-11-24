@@ -476,13 +476,6 @@ void git_main(crow::SimpleApp& app) {
         return serve_error(403);
     });
 
-    CROW_ROUTE(app, "/repo")
-    ([]() {
-        fs::path index = fs::path("git") / "index.html";
-        if (!fs::is_regular_file(index)) return serve_error(404);
-        return serve_file(index);
-    });
-
     CROW_ROUTE(app, "/repo/<path>")
     ([](const std::string& requested) {
         fs::path path(requested);
@@ -507,5 +500,12 @@ void git_main(crow::SimpleApp& app) {
             project,
             remaining.empty() ? "" : remaining.generic_string()
         );
+    });
+
+    CROW_ROUTE(app, "/repo")
+    ([]() {
+        fs::path index = fs::path("git") / "index.html";
+        if (!fs::is_regular_file(index)) return serve_error(404);
+        return serve_file(index);
     });
 }

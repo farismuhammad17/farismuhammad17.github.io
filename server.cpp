@@ -1,6 +1,8 @@
 #include <algorithm>
 #include <cctype>
 #include <filesystem>
+#include <fstream>
+#include <sstream>
 #include <string>
 #include <crow.h>
 
@@ -83,17 +85,83 @@ static fs::path resolve_base(const crow::request& req) {
     return "";
 }
 
-static inline std::string error_text(int code) {
-    switch (code) {
-        case 400: return "Bad Request";
-        case 403: return "Forbidden";
-        case 404: return "Not Found";
-        case 405: return "Method Not Allowed";
-        case 500: return "Internal Server Error";
-        case 502: return "Bad Gateway";
-        case 503: return "Service Unavailable";
-        default:  return "Error";
+static std::string read_text(const fs::path& p) {
+    std::ifstream f(p, std::ios::binary);
+    std::ostringstream ss;
+    ss << f.rdbuf();
+    return ss.str();
+}
+
+static std::string html_escape(const std::string& in) {
+    std::string out;
+    for (char c : in) {
+        switch (c) {
+            case '&':  out += "&amp;";  break;
+            case '<':  out += "&lt;";   break;
+            case '>':  out += "&gt;";   break;
+            case '"':  out += "&quot;"; break;
+            default:   out += c;
+        }
     }
+    return out;
+}
+
+static void replace_all(std::string& s, const std::string& from, const std::string& to) {
+    for (std::size_t pos = 0; (pos = s.find(from, pos)) != std::string::npos; pos += to.size())
+        s.replace(pos, from.size(), to);
+}
+
+struct ErrorInfo { const char* tag; const char* title; const char* message; };
+
+static ErrorInfo error_info(int code) {
+    switch (code) {
+        case 400: return {"BAD_REQ",     "Bad Request",           "Your request was considered malicious."};
+        case 403: return {"FORBIDDEN",   "Forbidden",             "You are not allowed to access this."};
+        case 404: return {"NOT_FOUND",   "Invalid URL",           "The address you requested could not be resolved on this host."};
+        case 405: return {"BAD_METHOD",  "Method Not Allowed",    "This endpoint does not support that method."};
+        case 500: return {"SERVER_ERR",  "Internal Server Error", "Something broke on my end."};
+        case 502: return {"BAD_GATEWAY", "Bad Gateway",           "The backend returned an invalid response."};
+        case 503: return {"UNAVAILABLE", "Service Unavailable",   "The service is temporarily unavailable."};
+        default:  return {"ERROR",       "Error",                 "Something went wrong."};
+    }
+}
+
+crow::response serve_error_impl(const std::string& where, int code, const fs::path& base) {
+    crow::response res;
+    res.code = code;
+
+    ErrorInfo info = error_info(code);
+    res.set_header("Content-Type", "text/plain; charset=utf-8");
+    res.body = info.title;
+
+    fs::path candidates[] = {
+        base / "error.html",
+        base / "pages" / "error.html",
+        fs::path("root") / "error.html",
+        fs::path("root") / "pages" / "error.html",
+        fs::path("error.html")
+    };
+
+    for (const fs::path& candidate : candidates) {
+        if (!fs::is_regular_file(candidate)) continue;
+
+        std::string page = read_text(candidate);
+        std::string debug;
+#if SHOW_ERROR_SOURCE
+        debug = "<div class=\"src\">handler: " + html_escape(where) + "</div>";
+#endif
+        replace_all(page, "{{CODE}}",    std::to_string(code));
+        replace_all(page, "{{TAG}}",     info.tag);
+        replace_all(page, "{{TITLE}}",   info.title);
+        replace_all(page, "{{MESSAGE}}", info.message);
+        replace_all(page, "{{DEBUG}}",   debug);
+
+        res.body = page;
+        res.set_header("Content-Type", "text/html; charset=utf-8");
+        break;
+    }
+
+    return res;
 }
 
 std::string mime_for(const fs::path& path) {
@@ -156,34 +224,6 @@ std::string mime_for(const fs::path& path) {
         return "font/ttf";
 
     return "application/octet-stream";
-}
-
-crow::response serve_error(int code, const fs::path& base) {
-    crow::response res;
-    res.code = code;
-
-    fs::path filename = std::to_string(code) + ".html";
-
-    fs::path candidates[] = {
-        base / filename,
-        base / "pages" / filename,
-        fs::path("root") / filename,
-        fs::path("root") / "pages" / filename,
-        filename
-    };
-
-    for (const fs::path& candidate : candidates) {
-        if (fs::is_regular_file(candidate)) {
-            res.set_static_file_info(candidate.string(), mime_for(candidate));
-            res.code = code;
-            return res;
-        }
-    }
-
-    const std::string text = error_text(code);
-    res.set_header("Content-Type", "text/plain; charset=utf-8");
-    res.body = text;
-    return res;
 }
 
 crow::response serve_file(const fs::path& path, const std::string& mime) {
@@ -320,7 +360,7 @@ int main(int argc, char* argv[]) {
         return serve_file(llms);
     });
 
-    CROW_ROUTE(app, "/<path>")
+    CROW_ROUTE(app, "/<string>")
     ([](const crow::request& req,
         const std::string& requested) -> crow::response {
         fs::path base = resolve_base(req);
