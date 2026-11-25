@@ -32,6 +32,8 @@ Copyright (c) 2026 Faris Muhammad. All rights reserved.
     #define SHOW_ERROR_SOURCE 1
 #endif
 
+#define GITHUB_USERNAME "farismuhammad17"
+
 namespace fs = std::filesystem;
 
 crow::response serve_error_impl(

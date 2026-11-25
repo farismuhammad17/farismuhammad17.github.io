@@ -318,174 +318,42 @@ static crow::response git_project(const std::string& project, const std::string&
     return serve_error(404);
 }
 
-static bool git_write_all(int fd, const std::string& data) {
-    std::size_t written = 0;
-
-    while (written < data.size()) {
-        ssize_t result = write(fd, data.data() + written, data.size() - written);
-
-        if (result > 0) written += static_cast<std::size_t>(result);
-        else if (result < 0 && errno == EINTR) continue;
-        else return false;
-    }
-
-    return true;
-}
-
-static std::string git_read_all(int fd) {
-    std::string output;
-    char buffer[65536];
-
-    while (true) {
-        ssize_t result = read(fd, buffer, sizeof(buffer));
-
-        if (result > 0) output.append(buffer, static_cast<std::size_t>(result));
-        else if (result < 0 && errno == EINTR) continue;
-        else break;
-    }
-
-    return output;
-}
-
-static crow::response git_parse_cgi_output(const std::string& output) {
-    std::size_t separator = output.find("\r\n\r\n");
-    std::size_t separator_size = 4;
-
-    if (separator == std::string::npos) {
-        separator = output.find("\n\n");
-        separator_size = 2;
-    }
-
-    if (separator == std::string::npos) return serve_error(502);
-
-    std::string header_text = output.substr(0, separator);
-    std::string body = output.substr(separator + separator_size);
-
-    int status = 200;
-    std::string content_type = "application/octet-stream";
-
-    std::istringstream lines(header_text);
-    std::string line;
-
-    while (std::getline(lines, line)) {
-        if (!line.empty() && line.back() == '\r') line.pop_back();
-
-        std::size_t colon = line.find(':');
-        if (colon == std::string::npos) continue;
-
-        std::string name = line.substr(0, colon);
-        std::string value = line.substr(colon + 1);
-
-        if (!value.empty() && value[0] == ' ') value.erase(0, 1);
-
-        if (name == "Status") std::istringstream(value) >> status;
-        else if (name == "Content-Type") content_type = value;
-    }
-
-    crow::response response(status, body);
-    response.set_header("Content-Type", content_type);
-    response.set_header("X-Content-Type-Options", "nosniff");
-    return response;
-}
-
-static crow::response git_backend(
+static crow::response redirect_to_github(
     const crow::request& req,
     const std::string& project,
     const std::string& endpoint
 ) {
-    if (!git_safe_project(project)) return serve_error(400);
+    std::string clean_project = git_project_name(project);
+    if (!git_safe_project(clean_project)) return serve_error(400);
 
+    std::string target = "https://github.com/" GITHUB_USERNAME "/" + clean_project + ".git/" + endpoint;
     std::string query = git_query_string(req);
-
-    if (endpoint == "git-receive-pack" ||
-        (endpoint == "info/refs" && query.find("service=git-receive-pack") != std::string::npos))
-        return serve_error(403);
-
-    fs::path projects_root = fs::weakly_canonical("git/projects");
-    if (!fs::is_directory(projects_root / project)) return serve_error(404);
-
-    int in_pipe[2];
-    int out_pipe[2];
-
-    if (pipe(in_pipe) != 0) return serve_error(500);
-
-    if (pipe(out_pipe) != 0) {
-        close(in_pipe[0]);
-        close(in_pipe[1]);
-        return serve_error(500);
+    if (!query.empty()) {
+        target += "?" + query;
     }
 
-    pid_t child = fork();
-
-    if (child < 0) {
-        close(in_pipe[0]);
-        close(in_pipe[1]);
-        close(out_pipe[0]);
-        close(out_pipe[1]);
-        return serve_error(500);
-    }
-
-    if (child == 0) {
-        dup2(in_pipe[0], STDIN_FILENO);
-        dup2(out_pipe[1], STDOUT_FILENO);
-
-        close(in_pipe[0]);
-        close(in_pipe[1]);
-        close(out_pipe[0]);
-        close(out_pipe[1]);
-
-        std::string method = endpoint == "info/refs" ? "GET" : "POST";
-        std::string path_info = "/" + project + "/" + endpoint;
-        std::string git_protocol = req.get_header_value("Git-Protocol");
-
-        setenv("GIT_PROJECT_ROOT", projects_root.c_str(), 1);
-        setenv("GIT_HTTP_EXPORT_ALL", "1", 1);
-        setenv("REQUEST_METHOD", method.c_str(), 1);
-        setenv("QUERY_STRING", query.c_str(), 1);
-        setenv("SERVER_PROTOCOL", "HTTP/1.1", 1);
-        setenv("PATH_INFO", path_info.c_str(), 1);
-        setenv("REMOTE_USER", "", 1);
-        setenv("REMOTE_ADDR", "", 1);
-        setenv("CONTENT_TYPE", req.get_header_value("Content-Type").c_str(), 1);
-        setenv("CONTENT_LENGTH", std::to_string(req.body.size()).c_str(), 1);
-
-        if (!git_protocol.empty()) setenv("GIT_PROTOCOL", git_protocol.c_str(), 1);
-
-        execl("/usr/lib/git-core/git-http-backend", "git-http-backend", nullptr);
-        execl("/usr/libexec/git-core/git-http-backend", "git-http-backend", nullptr);
-        execl("/usr/bin/git", "git", "http-backend", nullptr);
-
-        _exit(127);
-    }
-
-    close(in_pipe[0]);
-    close(out_pipe[1]);
-
-    git_write_all(in_pipe[1], req.body);
-    close(in_pipe[1]);
-
-    std::string cgi_output = git_read_all(out_pipe[0]);
-    close(out_pipe[0]);
-
-    waitpid(child, nullptr, 0);
-
-    return git_parse_cgi_output(cgi_output);
+    crow::response res(307);
+    res.set_header("Location", target);
+    return res;
 }
 
 void git_main(crow::SimpleApp& app) {
-    CROW_ROUTE(app, "/<string>/info/refs")
+    CROW_ROUTE(app, "/repo/<string>/info/refs")
+    .methods(crow::HTTPMethod::GET)
     ([](const crow::request& req, const std::string& project) {
-        return git_backend(req, git_project_name(project), "info/refs");
+        return redirect_to_github(req, project, "info/refs");
     });
 
-    CROW_ROUTE(app, "/<string>/git-upload-pack")
+    CROW_ROUTE(app, "/repo/<string>/git-upload-pack")
+    .methods(crow::HTTPMethod::POST)
     ([](const crow::request& req, const std::string& project) {
-        return git_backend(req, git_project_name(project), "git-upload-pack");
+        return redirect_to_github(req, project, "git-upload-pack");
     });
 
-    CROW_ROUTE(app, "/<string>/git-receive-pack")
-    ([](const crow::request&, const std::string&) {
-        return serve_error(403);
+    CROW_ROUTE(app, "/repo/<string>/git-receive-pack")
+    .methods(crow::HTTPMethod::POST)
+    ([](const crow::request& req, const std::string& project) {
+        return redirect_to_github(req, project, "git-receive-pack");
     });
 
     CROW_ROUTE(app, "/repo/<path>")
