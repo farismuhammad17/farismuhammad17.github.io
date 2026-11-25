@@ -224,6 +224,12 @@ button.group-toggle[aria-expanded="true"] .chevron {
     color: #00ff66;
 }
 
+.contact-card div {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 10px;
+}
+
 html.is-mobile #sidebarToggle {
     top: 12px;
     left: 14px;
