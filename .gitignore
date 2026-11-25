@@ -3,3 +3,8 @@
 
 # Just git clone projects in
 /git/projects/*
+
+# WIP
+snapshots.py
+urls.py
+urls.txt
