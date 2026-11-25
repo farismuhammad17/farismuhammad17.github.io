@@ -1,0 +1,101 @@
+/*
+----------------------------------------------------------------
+Copyright (c) 2026 Faris Muhammad. All rights reserved.
+
+    Unauthorized copying, modification, distribution, or use of
+    this file, via any medium, is strictly prohibited without
+    prior written permission.
+
+- farismuhd.dev
+----------------------------------------------------------------
+*/
+
+@media (max-width: 768px) {
+    html, body {
+        min-height: 100vh;
+        min-height: 100dvh;
+    }
+
+    #circuitCanvas {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 116px;
+        z-index: 20;
+        background: #000000;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+        touch-action: manipulation;
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    #contentOverlay {
+        position: static;
+        margin: 0;
+        width: auto;
+        padding: 140px 18px 56px;
+    }
+
+    .page h1 {
+        font-size: 24px;
+        margin-bottom: 16px;
+        padding-bottom: 8px;
+        letter-spacing: 0;
+        overflow-wrap: anywhere;
+    }
+
+    .page h2 {
+        font-size: 20px;
+        margin-top: 22px;
+        margin-bottom: 12px;
+    }
+
+    .page h3 { font-size: 18px; }
+    .page h4 { font-size: 16px; }
+
+    .page p,
+    .page li {
+        font-size: 15px;
+        line-height: 1.65;
+    }
+
+    .page .header-button {
+        float: none;
+        position: static;
+        top: auto;
+        display: inline-flex;
+        margin: 0 0 16px;
+        padding: 5px 12px;
+        font-size: 14px;
+    }
+
+    .tech-stack {
+        gap: 6px;
+        margin: 14px 0;
+    }
+
+    .tech-tag {
+        font-size: 11px;
+        padding: 3px 8px;
+        height: 26px;
+    }
+
+    .page ul,
+    .page ol {
+        margin: 14px 0 14px 18px;
+    }
+
+    .code-block {
+        font-size: 11px;
+        padding: 12px;
+    }
+}
+
+@media (max-width: 380px) {
+    #contentOverlay {
+        padding-left: 14px;
+        padding-right: 14px;
+    }
+
+    .page h1 { font-size: 22px; }
+}

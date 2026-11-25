@@ -1,0 +1,258 @@
+/*
+----------------------------------------------------------------
+Copyright (c) 2026 Faris Muhammad. All rights reserved.
+
+    Unauthorized copying, modification, distribution, or use of
+    this file, via any medium, is strictly prohibited without
+    prior written permission.
+
+- farismuhd.dev
+----------------------------------------------------------------
+*/
+
+:root {
+    --sidebar-width: clamp(280px, 46vw, 900px);
+    --sidebar-width-mobile: 100vw;
+}
+
+#sidebarToggle {
+    position: fixed;
+    top: 42px;
+    left: calc(max(40px, 4vw) - 12px);
+    z-index: 100;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    border: 1px solid rgba(255, 255, 255, 0.25);
+    background: #0b0b0d;
+    color: #ffffff;
+    cursor: pointer;
+    transition: background-color 0.3s ease, border-color 0.3s ease, color 0.2s ease;
+}
+
+#sidebarToggle:hover {
+    border-color: #00ff66;
+    color: #00ff66;
+}
+
+#sidebarToggle:focus-visible {
+    outline: 2px solid #00ff66;
+    outline-offset: 3px;
+}
+
+#sidebarToggle[aria-expanded="true"] {
+    background: transparent;
+    border-color: transparent;
+}
+
+#sidebarToggle[aria-expanded="true"]:hover {
+    border-color: transparent;
+}
+
+#sidebarToggle svg {
+    width: 20px;
+    height: 20px;
+    display: block;
+}
+
+/* Sidebar panel */
+
+#sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 90;
+    height: 100vh;
+    height: 100dvh;
+    width: var(--sidebar-width);
+    display: flex;
+    flex-direction: column;
+    padding: 120px 40px 32px;
+    overflow: hidden;
+    background: rgba(0, 0, 0, 0.5);
+    -webkit-backdrop-filter: blur(14px) saturate(140%);
+    backdrop-filter: blur(14px) saturate(140%);
+    border-right: 1px solid rgba(255, 255, 255, 0.12);
+    transform: translateX(-100%);
+    visibility: hidden;
+    transition: transform 0.4s cubic-bezier(0.22, 0.8, 0.3, 1), visibility 0s linear 0.4s;
+}
+
+#sidebar.open {
+    transform: translateX(0);
+    visibility: visible;
+    transition-delay: 0s;
+}
+
+#sidebar::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 260px;
+    background: linear-gradient(to bottom,
+        rgba(0, 0, 0, 0.88) 0%,
+        rgba(0, 0, 0, 0.6) 55%,
+        rgba(0, 0, 0, 0) 100%);
+    pointer-events: none;
+}
+
+#sidebar > * {
+    position: relative;
+}
+
+.sidebar-nav {
+    flex: 1 1 auto;
+    min-height: 0;
+    max-width: 420px;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    scrollbar-width: none;
+}
+
+.sidebar-nav::-webkit-scrollbar {
+    display: none;
+}
+
+.sidebar-nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.sidebar-nav a,
+.sidebar-nav button.group-toggle {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    padding: 11px 14px;
+    border: 1px solid transparent;
+    border-radius: 6px;
+    background: none;
+    color: #ffffff;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 16px;
+    text-align: left;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.sidebar-nav a:hover,
+.sidebar-nav button.group-toggle:hover {
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(255, 255, 255, 0.15);
+    color: #00ff66;
+}
+
+.sidebar-nav a:focus-visible,
+.sidebar-nav button.group-toggle:focus-visible {
+    outline: 2px solid #00ff66;
+    outline-offset: -2px;
+}
+
+.chevron {
+    width: 10px;
+    height: 10px;
+    flex: none;
+    border-right: 2px solid currentColor;
+    border-bottom: 2px solid currentColor;
+    transform: rotate(-45deg);
+    transition: transform 0.25s ease;
+}
+
+button.group-toggle[aria-expanded="true"] .chevron {
+    transform: rotate(45deg);
+}
+
+.sub {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.3s ease;
+}
+
+.sub.open {
+    grid-template-rows: 1fr;
+}
+
+.sub > ul {
+    overflow: hidden;
+    min-height: 0;
+    margin-left: 18px;
+    padding-left: 8px;
+    border-left: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.sub a {
+    font-size: 14px;
+    color: #dddddd;
+    padding: 8px 14px;
+}
+
+.contact-card {
+    flex: none;
+    max-width: 420px;
+    margin-top: 16px;
+    padding: 0 14px;
+    font-size: 13px;
+    line-height: 1.7;
+    color: #e6e6e6;
+}
+
+.contact-card strong {
+    display: block;
+    font-weight: normal;
+    color: #e6e6e6;
+}
+
+.contact-card a {
+    display: block;
+    width: fit-content;
+    color: #e6e6e6;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.contact-card a:hover {
+    color: #00ff66;
+}
+
+html.is-mobile #sidebarToggle {
+    top: 12px;
+    left: 14px;
+    background: transparent;
+    border-color: transparent;
+    -webkit-tap-highlight-color: transparent;
+}
+
+html.is-mobile #sidebarToggle:hover {
+    border-color: transparent;
+}
+
+html.is-mobile #sidebar {
+    width: var(--sidebar-width-mobile);
+    padding: 92px 28px calc(28px + env(safe-area-inset-bottom, 0px));
+    background: rgba(0, 0, 0, 0.78);
+    border-right: 0;
+}
+
+html.is-mobile .sidebar-nav,
+html.is-mobile .contact-card {
+    max-width: 520px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    #sidebar,
+    .sub,
+    .chevron,
+    #sidebarToggle {
+        transition-duration: 0s !important;
+    }
+}

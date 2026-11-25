@@ -19,6 +19,14 @@ let isPulseActive = false;
 const pages = document.querySelectorAll('.page');
 const currentAddrSpan = document.getElementById('current-addr');
 
+const MOBILE_BREAKPOINT = (typeof MOBILE_MAX_WIDTH !== 'undefined') ? MOBILE_MAX_WIDTH : 1100;
+const MOBILE_HEADER_H = 116;
+const OFFSCREEN_X = 5000;
+
+function isMobile() {
+    return window.innerWidth <= MOBILE_BREAKPOINT;
+}
+
 function getLayoutConfig() {
     const W = window.innerWidth;
     const unit = Math.max(38, Math.min(58, W * 0.032));
@@ -26,7 +34,8 @@ function getLayoutConfig() {
 
     const controlPanelStartX = Math.max(W * 0.52, startX + (unit * 6.5));
 
-    return {
+    const config = {
+        mobile: false,
         startX: startX,
         startY: 100,
         stageH: 210,
@@ -41,21 +50,54 @@ function getLayoutConfig() {
         gateWidth: unit * 1.6,
         gateHeight: unit * 0.9
     };
+
+    if (isMobile()) {
+        // Fit "[-] 8 bits [+]" (width = 9.06 * cu + 12) inside the screen, centred.
+        const margin = 16;
+        const cu = Math.min(48, (W - (margin * 2) - 12) / 9.06);
+        const totalW = (cu * 9.06) + 12;
+        const decX = Math.max(margin, (W - totalW) / 2);
+
+        config.mobile = true;
+        config.btnWidth = cu * 0.85;
+        config.btnHeight = cu * 0.8;
+        config.bitWidth = cu * 0.85;
+        config.bitHeight = cu * 0.8;
+        config.bitSpacing = cu * 0.92;
+        config.controlPanelY = 64;
+        config.decBtnX = decX;
+        config.bitsStartX = decX + (cu * 0.85) + 8;
+    }
+
+    return config;
 }
 
 let cfg = getLayoutConfig();
 
 function resizeCanvas() {
     const dpr = window.devicePixelRatio || 1;
+
+    document.documentElement.classList.toggle('is-mobile', isMobile());
     cfg = getLayoutConfig();
 
+    const cssHeight = cfg.mobile
+        ? MOBILE_HEADER_H
+        : Math.max(document.body.scrollHeight, 2400);
+
     canvas.width = Math.floor(window.innerWidth * dpr);
-    canvas.height = Math.floor(Math.max(document.body.scrollHeight, 2400) * dpr);
+    canvas.height = Math.floor(cssHeight * dpr);
+    canvas.style.height = cfg.mobile ? (MOBILE_HEADER_H + 'px') : '';
     ctx.imageSmoothingEnabled = false;
     render();
 }
 
-window.addEventListener('resize', resizeCanvas);
+let lastWidth = window.innerWidth;
+
+window.addEventListener('resize', () => {
+    if (cfg.mobile && isMobile() && window.innerWidth === lastWidth) return;
+    lastWidth = window.innerWidth;
+    resizeCanvas();
+});
 window.addEventListener('scroll', render);
 
 class Gate {
@@ -270,9 +312,22 @@ function render() {
 
     ctx.fillStyle = '#888899';
     ctx.font = '12px Courier New, monospace';
-    ctx.textAlign = 'left';
     const hexStr = '0x' + accumulator.toString(16).padStart(2, '0').toUpperCase();
-    ctx.fillText(`= ${accumulator} (${hexStr})`, incBtn.x + incBtn.w + 10, incBtn.y + incBtn.h / 2);
+    const valueLabel = `= ${accumulator} (${hexStr})`;
+    if (cfg.mobile) {
+        ctx.textAlign = 'right';
+        ctx.fillText(valueLabel, incBtn.x + incBtn.w, 34);
+    } else {
+        ctx.textAlign = 'left';
+        ctx.fillText(valueLabel, incBtn.x + incBtn.w + 10, incBtn.y + incBtn.h / 2);
+    }
+    ctx.textAlign = 'left';
+
+    // On mobile the whole circuit is drawn far outside the canvas:
+    // it still runs identically, it just can't be seen.
+    if (cfg.mobile) {
+        ctx.translate(-OFFSCREEN_X, 0);
+    }
 
     const startX = cfg.startX;
     const startY = cfg.startY;

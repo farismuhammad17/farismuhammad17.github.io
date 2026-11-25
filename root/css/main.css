@@ -267,3 +267,91 @@ html::-webkit-scrollbar, body::-webkit-scrollbar {
     background: rgba(255, 255, 255, 0.2);
     border-radius: 3px;
 }
+
+html.is-mobile,
+html.is-mobile body {
+    min-height: 100vh;
+    min-height: 100dvh;
+}
+
+html.is-mobile #circuitCanvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 116px;
+    z-index: 20;
+    background: #000000;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+}
+
+html.is-mobile #contentOverlay {
+    position: static;
+    margin: 0 auto;
+    width: auto;
+    max-width: 720px;
+    padding: 140px 18px 56px;
+}
+
+html.is-mobile .page h1 {
+    font-size: clamp(22px, 6.2vw, 32px);
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    letter-spacing: 0;
+    overflow-wrap: anywhere;
+}
+
+html.is-mobile .page h2 {
+    font-size: clamp(18px, 5vw, 24px);
+    margin-top: 22px;
+    margin-bottom: 12px;
+}
+
+html.is-mobile .page h3 { font-size: 18px; }
+html.is-mobile .page h4 { font-size: 16px; }
+
+html.is-mobile .page p,
+html.is-mobile .page li {
+    font-size: clamp(15px, 13px + 0.5vw, 17px);
+    line-height: 1.65;
+}
+
+html.is-mobile .page .header-button {
+    float: none;
+    position: static;
+    top: auto;
+    display: inline-flex;
+    margin: 0 0 16px;
+    padding: 5px 12px;
+    font-size: 14px;
+}
+
+html.is-mobile .tech-stack {
+    gap: 6px;
+    margin: 14px 0;
+}
+
+html.is-mobile .tech-tag {
+    font-size: 11px;
+    padding: 3px 8px;
+    height: 26px;
+}
+
+html.is-mobile .page ul,
+html.is-mobile .page ol {
+    margin: 14px 0 14px 18px;
+}
+
+html.is-mobile .code-block {
+    font-size: 11px;
+    padding: 12px;
+}
+
+@media (max-width: 380px) {
+    html.is-mobile #contentOverlay {
+        padding-left: 14px;
+        padding-right: 14px;
+    }
+}

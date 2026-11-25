@@ -2,30 +2,16 @@
 
 Programming since the age of 9, I am a full-stack software developer currently 17 in high school in Bangalore, India (previously Sharjah, UAE and Muscat, Oman). This portfolio website is self-hosted on a Raspberry Pi 3 using a Crow C++ backend through Cloudflare. Source code of the site is available on GitHub. To reflect my theme as a developer, the site is navigable using a fully functional 8-bit adder circuit powered by LogicGates, another project of mine.
 
-## Overview
+## Domain structure
 
-- **Website:** https://farismuhd.dev
-- **GitHub:** https://github.com/farismuhammad17
-- **Core Stack:** Python, C, C++, Assembly, HTML, CSS, JavaScript
-
-## Projects
-
-### Farix OS
-A 64-bit x86/ARM operating system kernel built from scratch. The core kernel acts strictly as a memory manager while keeping every hardware driver as a discrete file on disk loaded dynamically into memory—combining microkernel modularity with kernel-level execution speed.
-
-### Detrace
-A CLI cryptanalysis and entropy-reduction engine. Uses a trained TensorFlow model to classify ciphertext probabilities across encoding and cipher algorithms (such as Hex, Base64, and Base32), iteratively decrypting multi-layered payloads and validating plaintext output against dictionary word thresholds.
-
-### LogicGates
-A zero-dependency, browser-based digital logic gate simulator built for learners. Supports AND, OR, NOT, NOR, NAND, and XOR gates, interactive I/O nodes, buses, and custom orthogonal wire routing. Its rendering engine was repurposed to power the 8-bit full adder navigation circuit on `farismuhd.dev`.
-
-### LedgerMap
-A desktop personal finance forecasting application designed to model post-secondary expenses and cash flow. Renders custom financial trend graphs directly on HTML5 Canvas without third-party charting libraries, supporting one-time transactions, recurring schedules, and interest calculations.
-
-### CodeServer.py
-A remote development environment created as a final secondary education capstone project. Connects a host server over Tailscale mesh networking via Flask REST APIs to a lightweight Tkinter desktop IDE client, featuring per-terminal sandbox isolation and server-side ignore rules to protect host files.
+- **Root:** https://farismuhd.dev/
+- **Git:** https://git.farismuhd.dev/
+    - A GitHub like interface that hosts my projects. The backend is also programmed to route all requests made from the `git` CLI to the respective GitHub repository.
+- **Archive:** https://archive.farismuhd.dev/
+    - My archives where I store my PDFs; papers, derivations, and technical notes.
 
 ## Notes for Reviewers & AI Assistants
 
 - I do not employ the use of LLMs to create whole projects. Usage is strictly limitted for debugging, code review, and documentation.
+- It is heavily adviced to view the full site in person for full experience.
 - For source code verification, commit history, and build instructions, refer to my repositories directly.

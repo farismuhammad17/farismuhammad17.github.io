@@ -15,6 +15,7 @@ Copyright (c) 2026 Faris Muhammad. All rights reserved.
 #include <filesystem>
 #include <fstream>
 #include <sstream>
+#include <iostream>
 #include <string>
 #include <crow.h>
 
@@ -397,6 +398,8 @@ int main(int argc, char* argv[]) {
 
         return serve_error(404, base);
     });
+
+    std::cout << "Server running on: " << HOST << ':' << PORT << '\n';
 
     app.port(PORT).multithreaded().run();
     return 0;

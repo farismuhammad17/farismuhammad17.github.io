@@ -99,7 +99,14 @@ Copyright (c) 2026 Faris Muhammad. All rights reserved.
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Reem+Kufi:wght@700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/main.css">
+
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/sidebar.css">
+
+    <script>
+        const MOBILE_MAX_WIDTH = 1100;
+        document.documentElement.classList.toggle('is-mobile', window.innerWidth <= MOBILE_MAX_WIDTH);
+    </script>
 </head>
 <body>
     <canvas id="circuitCanvas"></canvas>
@@ -170,6 +177,11 @@ Copyright (c) 2026 Faris Muhammad. All rights reserved.
                 which represents the current page number. The 8-bit full adder circuit was designed in raw
                 JavaScript using an HTML canvas, hence why it looks like that. You can also toggle the bits
                 (left-click) to navigate pages (assuming you know binary).
+            </p>
+
+            <p>
+                To navigate to other pages in this site, toggle the sidebar. The entire site is owned by me
+                and hosted at home on a Raspberry PI 3 with C++ Crow backend.
             </p>
         </div>
 
@@ -421,7 +433,56 @@ Target: 54564a45566b30325645564a546b4a4551566454575535425755453950543039
         </div>
     </div>
 
-    <script src="js/main.js"></script>
+    <button id="sidebarToggle" type="button" aria-label="Toggle navigation" aria-controls="sidebar" aria-expanded="false">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+            <line x1="3" y1="6" x2="21" y2="6"/>
+            <line x1="3" y1="12" x2="21" y2="12"/>
+            <line x1="3" y1="18" x2="21" y2="18"/>
+        </svg>
+    </button>
+
+    <aside id="sidebar" aria-label="Site sidebar" aria-hidden="true">
+        <nav class="sidebar-nav" aria-label="Sidebar">
+            <ul>
+                <li>
+                    <button type="button" class="group-toggle" aria-expanded="false" aria-controls="sidebarProjects">
+                        Projects <span class="chevron"></span>
+                    </button>
+                    <div class="sub" id="sidebarProjects">
+                        <ul>
+                            <li><a href="https://git.farismuhd.dev/repo/farix">Farix OS</a></li>
+                            <li><a href="https://git.farismuhd.dev/repo/LogicGates">LogicGates</a></li>
+                            <li><a href="https://git.farismuhd.dev/repo/LedgerMap">LedgerMap</a></li>
+                            <li><a href="https://git.farismuhd.dev/repo/Detrace">Detrace</a></li>
+                            <li><a href="https://git.farismuhd.dev/repo/CodeServer.py">CodeServer.py</a></li>
+                        </ul>
+                    </div>
+                </li>
+
+                <li>
+                    <button type="button" class="group-toggle" aria-expanded="false" aria-controls="sidebarRepositories">
+                        Repositories <span class="chevron"></span>
+                    </button>
+                    <div class="sub" id="sidebarRepositories">
+                        <ul>
+                            <li><a href="https://git.farismuhd.dev/">Git</a></li>
+                            <li><a href="https://github.com/farismuhammad17/" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+                        </ul>
+                    </div>
+                </li>
+
+                <li><a href="https://archive.farismuhd.dev/" rel="noopener noreferrer">Archives</a></li>
+            </ul>
+        </nav>
+
+        <div class="contact-card">
+            <strong>Faris Muhammad</strong>
+            <a href="mailto:contact@farismuhd.dev">contact@farismuhd.dev</a>
+        </div>
+    </aside>
+
+    <script src="/js/main.js"></script>
+    <script src="/js/sidebar.js"></script>
 
     <script>
         const birthDate = new Date(Date.UTC(2009, 9, 17));

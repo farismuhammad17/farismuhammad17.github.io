@@ -27,6 +27,7 @@ Copyright (c) 2026 Faris Muhammad. All rights reserved.
     #define PORT 8080
     #define SHOW_ERROR_SOURCE 0
 #else
+    #warning "Building in DEVELOPMENT mode (PRODUCTION = 0): HOST is localhost."
     #define HOST "localhost"
     #define PORT 8080
     #define SHOW_ERROR_SOURCE 1
