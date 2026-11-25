@@ -1,3 +1,15 @@
+/*
+----------------------------------------------------------------
+Copyright (c) 2026 Faris Muhammad. All rights reserved.
+
+    Unauthorized copying, modification, distribution, or use of
+    this file, via any medium, is strictly prohibited without
+    prior written permission.
+
+- farismuhd.dev
+----------------------------------------------------------------
+*/
+
 const canvas = document.getElementById('circuitCanvas');
 const ctx = canvas.getContext('2d');
 

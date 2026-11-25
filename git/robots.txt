@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://git.farismuhd.dev/sitemap.xml
