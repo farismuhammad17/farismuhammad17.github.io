@@ -74,6 +74,90 @@ function getLayoutConfig() {
 
 let cfg = getLayoutConfig();
 
+function getButtonBoxes() {
+    const incX = cfg.bitsStartX + (8 * cfg.bitSpacing) + 4;
+    return {
+        dec: { x: cfg.decBtnX, y: cfg.controlPanelY, w: cfg.btnWidth, h: cfg.btnHeight },
+        inc: { x: incX,        y: cfg.controlPanelY, w: cfg.btnWidth, h: cfg.btnHeight }
+    };
+}
+
+function inBox(box, x, y) {
+    return x >= box.x && x <= box.x + box.w && y >= box.y && y <= box.y + box.h;
+}
+
+// 0 = idle, 1 = fully hovered.
+const hover = { dec: 0, inc: 0 };
+const hoverTarget = { dec: 0, inc: 0 };
+let hoverAnimating = false;
+
+function animateHover() {
+    let moving = false;
+    for (const k of ['dec', 'inc']) {
+        const d = hoverTarget[k] - hover[k];
+        if (Math.abs(d) > 0.02) {
+            hover[k] += d * 0.25;
+            moving = true;
+        } else {
+            hover[k] = hoverTarget[k];
+        }
+    }
+    render();
+    if (moving) {
+        requestAnimationFrame(animateHover);
+    } else {
+        hoverAnimating = false;
+    }
+}
+
+function setHover(overDec, overInc) {
+    hoverTarget.dec = overDec ? 1 : 0;
+    hoverTarget.inc = overInc ? 1 : 0;
+    if (!hoverAnimating) {
+        hoverAnimating = true;
+        requestAnimationFrame(animateHover);
+    }
+}
+
+const WHITE = [255, 255, 255];
+const GREEN = [0, 255, 136];
+const BTN_FILL = [10, 10, 12];
+const BTN_FILL_HOVER = [16, 38, 28];
+
+function mixColor(from, to, t) {
+    const c = from.map((v, i) => Math.round(v + (to[i] - v) * t));
+    return `rgb(${c[0]},${c[1]},${c[2]})`;
+}
+
+function drawButton(box, label, h) {
+    ctx.fillStyle = mixColor(BTN_FILL, BTN_FILL_HOVER, h);
+    ctx.strokeStyle = mixColor(WHITE, GREEN, h);
+    ctx.lineWidth = 1.5;
+    ctx.fillRect(box.x, box.y, box.w, box.h);
+    ctx.strokeRect(box.x, box.y, box.w, box.h);
+
+    ctx.fillStyle = mixColor(WHITE, GREEN, h);
+    ctx.font = '15px Courier New, monospace';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(label, Math.round(box.x + box.w / 2), Math.round(box.y + box.h / 2));
+}
+
+function drawCaption(box, text) {
+    ctx.font = '10px Courier New, monospace';
+    if ('letterSpacing' in ctx) ctx.letterSpacing = '1px';
+
+    const centerX = Math.round(box.x + box.w / 2);
+    const y = Math.round(box.y - 7);
+
+    ctx.fillStyle = '#999999';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText(text, centerX, y);
+
+    if ('letterSpacing' in ctx) ctx.letterSpacing = '0px';
+}
+
 function resizeCanvas() {
     const dpr = window.devicePixelRatio || 1;
 
@@ -181,42 +265,42 @@ function drawOrthogonalWire(ctx, points, isActive) {
     ctx.stroke();
 }
 
+// Only [-] and [+] change the value. The bit boxes are display-only.
 canvas.addEventListener('click', (e) => {
     const rect = canvas.getBoundingClientRect();
     const mouseX = e.clientX - rect.left;
     const mouseY = e.clientY - rect.top;
+    const box = getButtonBoxes();
 
-    const decBtnBox = { x: cfg.decBtnX, y: cfg.controlPanelY, w: cfg.btnWidth, h: cfg.btnHeight };
-    const incBtnX = cfg.bitsStartX + (8 * cfg.bitSpacing) + 4;
-    const incBtnBox = { x: incBtnX, y: cfg.controlPanelY, w: cfg.btnWidth, h: cfg.btnHeight };
-
-    if (mouseX >= decBtnBox.x && mouseX <= decBtnBox.x + decBtnBox.w &&
-        mouseY >= decBtnBox.y && mouseY <= decBtnBox.y + decBtnBox.h) {
+    if (inBox(box.dec, mouseX, mouseY)) {
         accumulator = (accumulator - 1 + 256) % 256;
         triggerPulse();
-        return;
-    }
-
-    if (mouseX >= incBtnBox.x && mouseX <= incBtnBox.x + incBtnBox.w &&
-        mouseY >= incBtnBox.y && mouseY <= incBtnBox.y + incBtnBox.h) {
+    } else if (inBox(box.inc, mouseX, mouseY)) {
         accumulator = (accumulator + 1) % 256;
         triggerPulse();
-        return;
     }
+});
 
-    for (let i = 0; i < 8; i++) {
-        const boxX = cfg.bitsStartX + (i * cfg.bitSpacing);
-        const boxY = cfg.controlPanelY;
-        const boxW = cfg.bitWidth;
-        const boxH = cfg.bitHeight;
+// Hover (mouse only, so a tap on a phone never leaves a button stuck highlighted)
+canvas.addEventListener('pointermove', (e) => {
+    if (e.pointerType && e.pointerType !== 'mouse') return;
 
-        if (mouseX >= boxX && mouseX <= boxX + boxW && mouseY >= boxY && mouseY <= boxY + boxH) {
-            const bitPosition = 7 - i;
-            accumulator = accumulator ^ (1 << bitPosition);
-            triggerPulse();
-            return;
-        }
+    const rect = canvas.getBoundingClientRect();
+    const mouseX = e.clientX - rect.left;
+    const mouseY = e.clientY - rect.top;
+    const box = getButtonBoxes();
+    const overDec = inBox(box.dec, mouseX, mouseY);
+    const overInc = inBox(box.inc, mouseX, mouseY);
+
+    canvas.style.cursor = (overDec || overInc) ? 'pointer' : '';
+    if ((overDec ? 1 : 0) !== hoverTarget.dec || (overInc ? 1 : 0) !== hoverTarget.inc) {
+        setHover(overDec, overInc);
     }
+});
+
+canvas.addEventListener('pointerleave', () => {
+    canvas.style.cursor = '';
+    setHover(false, false);
 });
 
 function triggerPulse() {
@@ -273,18 +357,10 @@ function render() {
     const incBtnX = cfg.bitsStartX + (8 * cfg.bitSpacing) + 4;
     const incBtn = { x: incBtnX, y: cfg.controlPanelY, w: cfg.btnWidth, h: cfg.btnHeight };
 
-    ctx.fillStyle = '#0a0a0c';
-    ctx.strokeStyle = '#ffffff';
-    ctx.lineWidth = 1.5;
-    ctx.fillRect(decBtn.x, decBtn.y, decBtn.w, decBtn.h);
-    ctx.strokeRect(decBtn.x, decBtn.y, decBtn.w, decBtn.h);
+    drawButton(decBtn, '-', hover.dec);
 
-    ctx.fillStyle = '#ffffff';
-    ctx.font = '15px Courier New, monospace';
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
-    ctx.fillText('-', Math.round(decBtn.x + decBtn.w/2), Math.round(decBtn.y + decBtn.h/2));
-
     for (let i = 0; i < 8; i++) {
         const box = bits[i];
         const bitVal = (accumulator >> (7 - i)) & 1;
@@ -300,15 +376,7 @@ function render() {
         ctx.fillText(bitVal.toString(), Math.round(box.x + box.w/2), Math.round(box.y + box.h/2));
     }
 
-    ctx.fillStyle = '#0a0a0c';
-    ctx.strokeStyle = '#ffffff';
-    ctx.lineWidth = 1.5;
-    ctx.fillRect(incBtn.x, incBtn.y, incBtn.w, incBtn.h);
-    ctx.strokeRect(incBtn.x, incBtn.y, incBtn.w, incBtn.h);
-
-    ctx.fillStyle = '#ffffff';
-    ctx.font = '15px Courier New, monospace';
-    ctx.fillText('+', Math.round(incBtn.x + incBtn.w/2), Math.round(incBtn.y + incBtn.h/2));
+    drawButton(incBtn, '+', hover.inc);
 
     ctx.fillStyle = '#888899';
     ctx.font = '12px Courier New, monospace';
@@ -514,6 +582,12 @@ function render() {
             ], currentCin);
         }
     }
+
+    if (cfg.mobile) {
+        ctx.translate(OFFSCREEN_X, 0);
+    }
+    drawCaption(decBtn, 'PREV');
+    drawCaption(incBtn, 'NEXT');
 
     ctx.restore();
 }

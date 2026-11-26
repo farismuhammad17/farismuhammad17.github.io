@@ -89,6 +89,16 @@ html::-webkit-scrollbar, body::-webkit-scrollbar {
 }
 
 .page h2 {
+    font-size: clamp(28px, 2.5vw, 40px);
+    font-weight: bold;
+    margin-bottom: 20px;
+    padding-bottom: 10px;
+    color: #ffffff;
+    letter-spacing: -0.5px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.page h3 {
     font-size: clamp(22px, 2vw, 32px);
     font-weight: bold;
     margin-top: 24px;
@@ -99,7 +109,7 @@ html::-webkit-scrollbar, body::-webkit-scrollbar {
     border-bottom: 1px solid rgba(255, 255, 255, 0.15);
 }
 
-.page h3 {
+.page h4 {
     font-size: clamp(18px, 1.6vw, 24px);
     font-weight: bold;
     margin-top: 20px;
@@ -107,7 +117,7 @@ html::-webkit-scrollbar, body::-webkit-scrollbar {
     color: #ffffff;
 }
 
-.page h4 {
+.page h5 {
     font-size: clamp(16px, 1.3vw, 20px);
     font-weight: bold;
     margin-top: 16px;
@@ -115,22 +125,12 @@ html::-webkit-scrollbar, body::-webkit-scrollbar {
     color: #e0e0e0;
 }
 
-.page h5 {
+.page h6 {
     font-size: clamp(14px, 1.1vw, 17px);
     font-weight: bold;
     margin-top: 14px;
     margin-bottom: 8px;
     color: #00ff66;
-}
-
-.page h6 {
-    font-size: clamp(12px, 1vw, 15px);
-    font-weight: bold;
-    margin-top: 12px;
-    margin-bottom: 6px;
-    color: #888888;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
 }
 
 .header-button {
